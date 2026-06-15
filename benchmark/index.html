@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shopify Conversion Rate Benchmarks by Niche (2026) | Notify Me!</title>
+<meta name="description" content="See the real 2026 average Shopify conversion rate for your niche — fashion, beauty, supplements, food, and more. Sourced from Dynamic Yield, IRP Commerce, ConvertCart and Littledata. Compare your store free.">
+<meta property="og:title" content="Shopify Conversion Rate Benchmarks by Niche (2026)">
+<meta property="og:description" content="Real, sourced 2026 conversion benchmarks for your niche. See where your store stands.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=PT+Mono&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#2C6ECB; --blue-deep:#1F52A0; --blue-soft:#EAF1FB; --blue-tint:#F5F8FE;
+    --ink:#101828; --ink-soft:#475467; --paper:#FFFFFF; --bg:#F7F9FC;
+    --line:#E4E9F2; --line-soft:#EEF2F8;
+    --crit:#E5484D; --warn:#F2A93B; --good:#1FAE6B;
+    --sans:"Inter",system-ui,-apple-system,sans-serif; --mono:"PT Mono",ui-monospace,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;}
+  body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 20px;}
+
+  /* top bar */
+  .bar{padding:22px 0;display:flex;align-items:center;justify-content:space-between;}
+  .brand{display:flex;align-items:center;gap:9px;text-decoration:none;}
+  .bell{width:30px;height:30px;background:var(--blue);border-radius:8px;display:flex;align-items:center;justify-content:center;flex:0 0 auto;}
+  .bell svg{width:17px;height:17px;}
+  .brand-name{font-weight:800;font-size:18px;letter-spacing:-0.01em;color:var(--ink);}
+  .brand-name i{color:var(--blue);font-style:italic;}
+  .bar-cta{font-size:13px;font-weight:600;text-decoration:none;color:var(--blue);border:1.5px solid var(--line);padding:8px 14px;border-radius:8px;transition:border-color .15s,background .15s;}
+  .bar-cta:hover{border-color:var(--blue);background:var(--blue-tint);}
+
+  /* hero */
+  .hero{padding:30px 0 8px;}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;color:var(--blue);background:var(--blue-soft);padding:6px 14px;border-radius:999px;margin-bottom:20px;}
+  h1{font-size:clamp(32px,6.2vw,50px);line-height:1.06;letter-spacing:-0.03em;font-weight:800;}
+  h1 span{color:var(--blue);}
+  .sub{margin-top:18px;font-size:18px;color:var(--ink-soft);max-width:56ch;}
+
+  .panel{margin-top:30px;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:26px;box-shadow:0 4px 24px rgba(16,24,40,.05);}
+  .field-label{font-family:var(--mono);font-size:12px;color:var(--ink-soft);margin-bottom:9px;display:block;}
+
+  .niche-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-bottom:22px;}
+  .niche-btn{display:flex;align-items:center;gap:9px;padding:13px 14px;border:1.5px solid var(--line);border-radius:11px;background:var(--bg);cursor:pointer;font-family:var(--sans);font-size:14px;font-weight:600;color:var(--ink);text-align:left;transition:border-color .15s,background .15s;}
+  .niche-btn:hover{border-color:var(--blue);background:var(--blue-tint);}
+  .niche-btn.sel{border-color:var(--blue);background:var(--blue-soft);box-shadow:0 0 0 3px var(--blue-soft);}
+  .niche-btn .emo{font-size:18px;line-height:1;}
+
+  .cvr-row{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;}
+  .cvr-field{flex:1 1 220px;}
+  .cvr-input-wrap{position:relative;}
+  .cvr-input{width:100%;font-family:var(--mono);font-size:16px;padding:15px 40px 15px 16px;border:1.5px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);outline:none;transition:border-color .15s,box-shadow .15s,background .15s;}
+  .cvr-input:focus{border-color:var(--blue);background:var(--paper);box-shadow:0 0 0 4px var(--blue-soft);}
+  .cvr-input::placeholder{color:#98A2B3;}
+  .cvr-pct{position:absolute;right:16px;top:50%;transform:translateY(-50%);color:var(--ink-soft);font-family:var(--mono);font-size:15px;}
+  .btn{font-family:var(--sans);font-weight:600;font-size:15px;padding:15px 26px;border:none;cursor:pointer;background:var(--blue);color:#fff;border-radius:10px;transition:background .15s,transform .1s;white-space:nowrap;}
+  .btn:hover{background:var(--blue-deep);}
+  .btn:active{transform:scale(.985);}
+  .err{color:var(--crit);font-size:13px;margin-top:12px;font-family:var(--mono);display:none;}
+  .opt-note{font-size:13px;color:var(--ink-soft);margin-top:12px;}
+
+  /* report */
+  .report{display:none;padding:8px 0 50px;}
+  .report.show{display:block;}
+
+  .verdict{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:28px;box-shadow:0 4px 24px rgba(16,24,40,.05);margin-bottom:22px;}
+  .verdict-niche{font-family:var(--mono);font-size:13px;color:var(--blue);margin-bottom:6px;}
+  .verdict h2{font-size:26px;letter-spacing:-0.02em;line-height:1.15;margin-bottom:10px;}
+  .verdict p{font-size:15px;color:var(--ink-soft);}
+  .verdict-tag{display:inline-block;font-family:var(--mono);font-size:12px;padding:4px 11px;border-radius:999px;margin-bottom:12px;color:#fff;}
+
+  /* range bar */
+  .rangewrap{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:26px;margin-bottom:22px;}
+  .rangewrap h3{font-size:15px;font-weight:700;margin-bottom:4px;}
+  .rangewrap .cap{font-size:13px;color:var(--ink-soft);margin-bottom:26px;}
+  .scale{position:relative;height:14px;border-radius:10px;background:linear-gradient(90deg,#FCE4E4 0%,#FDEFD6 45%,#DBF3E7 100%);margin:34px 0 8px;}
+  .band{position:absolute;top:0;bottom:0;background:var(--blue);opacity:.18;border-radius:4px;}
+  .band-edge{position:absolute;top:-6px;bottom:-6px;width:2px;background:var(--blue);}
+  .marker{position:absolute;top:-34px;transform:translateX(-50%);text-align:center;}
+  .marker .dot{width:16px;height:16px;border-radius:50%;background:var(--ink);border:3px solid #fff;box-shadow:0 0 0 2px var(--ink);margin:0 auto;position:relative;top:24px;}
+  .marker .lab{font-family:var(--mono);font-size:12px;font-weight:600;white-space:nowrap;background:var(--ink);color:#fff;padding:3px 8px;border-radius:6px;}
+  .scale-ticks{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;color:var(--ink-soft);margin-top:8px;}
+  .legend{display:flex;gap:20px;flex-wrap:wrap;margin-top:20px;font-size:13px;color:var(--ink-soft);}
+  .legend span{display:inline-flex;align-items:center;gap:7px;}
+  .legend i{width:12px;height:12px;border-radius:3px;display:inline-block;}
+
+  /* sources table */
+  .sources{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:26px;margin-bottom:22px;}
+  .sources h3{font-size:15px;font-weight:700;margin-bottom:4px;}
+  .sources .cap{font-size:13px;color:var(--ink-soft);margin-bottom:18px;}
+  .src-line{display:flex;align-items:center;gap:14px;padding:12px 0;border-top:1px solid var(--line-soft);}
+  .src-line:first-of-type{border-top:none;}
+  .src-name{flex:1;font-size:14px;font-weight:600;}
+  .src-name small{display:block;font-weight:400;color:var(--ink-soft);font-family:var(--mono);font-size:11px;margin-top:2px;}
+  .src-val{font-family:var(--mono);font-size:17px;font-weight:500;}
+
+  .context{background:var(--blue-tint);border:1px solid var(--blue-soft);border-radius:16px;padding:24px;margin-bottom:22px;}
+  .context h3{font-size:15px;font-weight:700;margin-bottom:10px;}
+  .context ul{list-style:none;}
+  .context li{font-size:14px;color:var(--ink-soft);padding:7px 0 7px 24px;position:relative;}
+  .context li::before{content:"";position:absolute;left:0;top:13px;width:8px;height:8px;border-radius:50%;background:var(--blue);}
+
+  /* cta */
+  .cta{background:var(--ink);color:#fff;border-radius:18px;padding:32px;position:relative;overflow:hidden;}
+  .cta::after{content:"";position:absolute;right:-50px;top:-50px;width:200px;height:200px;background:var(--blue);opacity:.22;border-radius:50%;filter:blur(8px);}
+  .cta h3{font-size:23px;letter-spacing:-0.02em;margin-bottom:9px;position:relative;}
+  .cta p{color:#C0CBDC;font-size:15px;max-width:50ch;margin-bottom:20px;position:relative;}
+  .cta-row{display:flex;gap:10px;flex-wrap:wrap;position:relative;}
+  .cta-btn{font-family:var(--sans);font-weight:600;font-size:15px;padding:14px 24px;background:var(--blue);color:#fff;border:none;border-radius:10px;cursor:pointer;text-decoration:none;display:inline-block;transition:background .15s;}
+  .cta-btn:hover{background:#3E82E0;}
+  .cta-ghost{font-family:var(--sans);font-weight:600;font-size:15px;padding:14px 24px;background:transparent;color:#fff;border:1.5px solid #2A3447;border-radius:10px;text-decoration:none;display:inline-block;transition:border-color .15s;}
+  .cta-ghost:hover{border-color:var(--blue);}
+
+  .restart{margin-top:22px;text-align:center;}
+  .restart button{background:none;border:none;font-family:var(--mono);font-size:13px;color:var(--ink-soft);cursor:pointer;text-decoration:underline;}
+
+  /* footer */
+  footer{border-top:1px solid var(--line);margin-top:20px;padding:28px 0 40px;}
+  .foot-row{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+  .foot-links{display:flex;gap:18px;flex-wrap:wrap;}
+  .foot-links a{font-size:13px;color:var(--ink-soft);text-decoration:none;}
+  .foot-links a:hover{color:var(--blue);}
+  .foot-copy{font-family:var(--mono);font-size:11px;color:#98A2B3;margin-top:14px;}
+  .foot-sources{font-size:12px;color:var(--ink-soft);margin-top:14px;line-height:1.7;}
+  .foot-sources a{color:var(--blue);text-decoration:none;}
+
+  @media (max-width:560px){
+    .panel{padding:20px;}
+    .niche-grid{grid-template-columns:repeat(2,1fr);}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="bar">
+    <a class="brand" href="https://notify-me.io" target="_blank" rel="noopener">
+      <span class="bell"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></span>
+      <span class="brand-name">Notify <i>Me!</i></span>
+    </a>
+    <a class="bar-cta" href="https://apps.shopify.com/back-in-stock-notifications?utm_source=benchmark-tool&utm_medium=button&utm_campaign=niche-benchmark" target="_blank" rel="noopener">Get the app →</a>
+  </div>
+
+  <!-- INPUT -->
+  <section class="hero" id="step-input">
+    <div class="eyebrow">2026 data · Dynamic Yield · IRP · ConvertCart · Littledata</div>
+    <h1>What's a <span>good</span> conversion rate<br>for your niche?</h1>
+    <p class="sub">The "average" Shopify conversion rate of 2–3% is close to meaningless. A 2% rate is excellent for luxury and a problem for food. Pick your niche, see the real 2026 benchmark range, and find where your store actually stands.</p>
+
+    <div class="panel">
+      <label class="field-label">1. Pick your niche</label>
+      <div class="niche-grid" id="niche-grid"></div>
+
+      <label class="field-label">2. Your store's conversion rate <span style="text-transform:none;color:#98A2B3;">(optional — leave blank to just see the benchmark)</span></label>
+      <div class="cvr-row">
+        <div class="cvr-field">
+          <div class="cvr-input-wrap">
+            <input class="cvr-input" id="cvr" type="text" inputmode="decimal" placeholder="e.g. 2.4" autocomplete="off">
+            <span class="cvr-pct">%</span>
+          </div>
+        </div>
+        <button class="btn" id="run">Show my benchmark</button>
+      </div>
+      <div class="err" id="err">Pick a niche first.</div>
+      <div class="opt-note">Sessions-to-orders is the standard definition. Use the same one your analytics reports.</div>
+    </div>
+  </section>
+
+  <!-- REPORT -->
+  <section class="report" id="step-report">
+    <div class="verdict">
+      <div class="verdict-niche" id="v-niche"></div>
+      <span class="verdict-tag" id="v-tag"></span>
+      <h2 id="v-title"></h2>
+      <p id="v-desc"></p>
+    </div>
+
+    <div class="rangewrap">
+      <h3 id="r-head"></h3>
+      <div class="cap" id="r-cap"></div>
+      <div class="scale" id="scale">
+        <div class="band" id="band"></div>
+        <div class="band-edge" id="edge-lo"></div>
+        <div class="band-edge" id="edge-hi"></div>
+        <div class="marker" id="marker" style="display:none;">
+          <div class="lab" id="marker-lab"></div>
+          <div class="dot"></div>
+        </div>
+      </div>
+      <div class="scale-ticks"><span>0%</span><span>2%</span><span>4%</span><span>6%+</span></div>
+      <div class="legend">
+        <span><i style="background:var(--blue);opacity:.5;"></i> Typical range for this niche</span>
+        <span><i style="background:var(--ink);"></i> Your store</span>
+      </div>
+    </div>
+
+    <div class="sources">
+      <h3>What each research panel reports for this niche</h3>
+      <div class="cap">Panels measure different store populations, so the numbers legitimately differ. The honest benchmark is the spread, not a single figure.</div>
+      <div id="src-list"></div>
+    </div>
+
+    <div class="context">
+      <h3>How to read your number</h3>
+      <ul id="ctx-list"></ul>
+    </div>
+
+    <div class="cta">
+      <h3 id="cta-head">Recover the demand you're already losing</h3>
+      <p id="cta-body">Most stores leak their easiest conversions at one point: a sold-out product. Notify Me! captures that demand with back-in-stock alerts, preorders, and low-stock nudges, then converts it when inventory returns. No code, free to start.</p>
+      <div class="cta-row">
+        <a class="cta-btn" href="https://apps.shopify.com/back-in-stock-notifications?utm_source=benchmark-tool&utm_medium=cta&utm_campaign=niche-benchmark" target="_blank" rel="noopener">Install Notify Me! free →</a>
+        <a class="cta-ghost" href="https://notify-me.io/tools" target="_blank" rel="noopener">See all free tools</a>
+      </div>
+    </div>
+
+    <div class="restart"><button id="restart">↺ Check another niche</button></div>
+  </section>
+
+  <footer>
+    <div class="foot-row">
+      <a class="brand" href="https://notify-me.io" target="_blank" rel="noopener">
+        <span class="bell"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></span>
+        <span class="brand-name">Notify <i>Me!</i></span>
+      </a>
+      <nav class="foot-links">
+        <a href="https://notify-me.io/back-in-stock" target="_blank" rel="noopener">Back in Stock</a>
+        <a href="https://notify-me.io/shopify-preorder" target="_blank" rel="noopener">Preorder</a>
+        <a href="https://notify-me.io/low-stock" target="_blank" rel="noopener">Low Stock</a>
+        <a href="https://notify-me.io/tools" target="_blank" rel="noopener">More tools</a>
+      </nav>
+    </div>
+    <div class="foot-sources">
+      <b>Data sources (2025–2026):</b>
+      Dynamic Yield Benchmarks (12-month rolling, 200M+ sessions) ·
+      IRP Commerce Market Data (live panel, April 2026) ·
+      ConvertCart Industry Benchmarks (2026 update) ·
+      Littledata Shopify benchmark (2,800 stores) ·
+      Statista global ecommerce CVR.
+      Figures are session-to-order conversion rates and are directional; ranges reflect cross-source differences in store population and methodology.
+    </div>
+    <div class="foot-copy">A free tool by Notify Me!™ · Never lose a sale.</div>
+  </footer>
+</div>
+
+<script>
+(function(){
+  const $ = id => document.getElementById(id);
+
+  /* ---- REAL sourced 2026 benchmark data ----
+     lo/hi = typical range across panels for this niche (% session-to-order)
+     mid   = representative midpoint used for the verdict
+     sources = the actual published figures from each named panel
+     Provenance: ConvertCart 2026 update; IRP Commerce live panel (Apr 2026);
+     Dynamic Yield enterprise panel; Littledata Shopify benchmark; Convertibles/Elogic
+     aggregations. See footer for full citation. */
+  const NICHES = {
+    fashion: { name:'Fashion & Apparel', emo:'👗', lo:1.45, hi:3.57, mid:2.5,
+      sources:[
+        ['IRP Commerce','UK-weighted SME panel, 2026','1.45%'],
+        ['ConvertCart','2026 industry update','3.57%'],
+        ['Dynamic Yield','Enterprise panel','2.88%'],
+        ['Convertibles','30+ Shopify Plus tests','2.0–3.0%']
+      ]},
+    beauty: { name:'Beauty & Personal Care', emo:'💄', lo:3.0, hi:4.30, mid:3.7,
+      sources:[
+        ['ConvertCart','2026 industry update','4.30%'],
+        ['Convertibles','Beauty & cosmetics, 2026','3.0–4.0%'],
+        ['Contentsquare','2026 retail (mobile)','3.4%'],
+        ['Elogic','Cross-source synthesis','3.0–4.5%']
+      ]},
+    supplements: { name:'Health, Wellness & Supplements', emo:'💊', lo:2.5, hi:3.89, mid:3.1,
+      sources:[
+        ['IRP Commerce','Health & wellbeing, 2025','3.89%'],
+        ['Enavi','Health & wellness, 2025','2.5–3.5%'],
+        ['Amasty','2024 sector data','5.11%'],
+        ['Trusted Web','2024–26 aggregate','2.5–3.89%']
+      ]},
+    food: { name:'Food & Beverage', emo:'🥦', lo:4.5, hi:6.22, mid:5.4,
+      sources:[
+        ['ConvertCart','2026 industry update','5.74–6.22%'],
+        ['IRP Commerce','Food & drink, 2025','4.9%'],
+        ['Convertibles','Food & beverage, 2026','4.5–6.0%'],
+        ['Triple Whale','2025 benchmark','4.9%']
+      ]},
+    electronics: { name:'Electronics & Tech', emo:'🎧', lo:0.8, hi:2.0, mid:1.4,
+      sources:[
+        ['Clean Commit','High-ticket electronics','0.8–1.5%'],
+        ['Enavi','Electronics, 2025','1.5–2.0%'],
+        ['Dynamic Yield','Consumer electronics','1.4–1.9%'],
+        ['Triple Whale','2025 benchmark','~1.4%']
+      ]},
+    home: { name:'Home & Living', emo:'🛋️', lo:1.0, hi:2.88, mid:1.6,
+      sources:[
+        ['ConvertCart','Home & living, 2026','1.27%'],
+        ['Triple Whale','Home goods, 2025','1.4%'],
+        ['Dynamic Yield','Consumer goods','2.88%'],
+        ['Convertibles','Furniture / home','1.0–1.6%']
+      ]},
+    pet: { name:'Pet Care', emo:'🐾', lo:3.0, hi:3.86, mid:3.4,
+      sources:[
+        ['ConvertCart','Pet care, 2026','3.86%'],
+        ['Dynamic Yield','Pet & animal','3.0–3.5%'],
+        ['Elogic','Subscription-heavy category','3.2–3.9%'],
+        ['Trusted Web','2026 aggregate','3.0–3.9%']
+      ]},
+    luxury: { name:'Luxury & Jewelry', emo:'💎', lo:0.8, hi:1.2, mid:0.95,
+      sources:[
+        ['ConvertCart','Luxury, 2026','0.88%'],
+        ['IRP Commerce','Luxury & jewellery','0.94%'],
+        ['Convertibles','Luxury & jewelry, 2026','0.8–1.2%'],
+        ['Contentsquare','Luxury (desktop)','1.4%']
+      ]}
+  };
+
+  let selected = null;
+
+  // build niche buttons
+  const grid = $('niche-grid');
+  Object.entries(NICHES).forEach(([k,n])=>{
+    const b=document.createElement('button');
+    b.className='niche-btn'; b.dataset.key=k;
+    b.innerHTML=`<span class="emo">${n.emo}</span><span>${n.name}</span>`;
+    b.addEventListener('click',()=>{
+      selected=k;
+      document.querySelectorAll('.niche-btn').forEach(x=>x.classList.remove('sel'));
+      b.classList.add('sel');
+      $('err').style.display='none';
+    });
+    grid.appendChild(b);
+  });
+
+  const pos = v => Math.max(0, Math.min(100, (v/6)*100)); // 0–6% scale → 0–100%
+
+  function run(){
+    if(!selected){ $('err').textContent='Pick a niche first.'; $('err').style.display='block'; return; }
+    const n = NICHES[selected];
+    const raw = $('cvr').value.trim().replace('%','');
+    const yours = raw==='' ? null : parseFloat(raw);
+    if(raw!=='' && (isNaN(yours) || yours<0 || yours>100)){ $('err').textContent='Enter a valid percentage (e.g. 2.4).'; $('err').style.display='block'; return; }
+    $('err').style.display='none';
+
+    // verdict
+    $('v-niche').textContent = n.emo+'  '+n.name+' · Shopify 2026';
+    const tag=$('v-tag');
+    if(yours===null){
+      tag.style.display='none';
+      $('v-title').textContent = `Typical range: ${n.lo}% – ${n.hi}%`;
+      $('v-desc').textContent = `Across the major research panels, ${n.name.toLowerCase()} stores in 2026 land roughly between ${n.lo}% and ${n.hi}%. Enter your own rate to see exactly where you sit.`;
+    } else {
+      tag.style.display='inline-block';
+      let verdict, color, desc;
+      if(yours >= n.hi){ verdict='Top of your niche'; color='var(--good)';
+        desc=`At ${yours}% you're at or above the top of the published range for ${n.name.toLowerCase()} (${n.lo}%–${n.hi}%). Strong. The next gains come from retention and AOV, not raw CVR.`; }
+      else if(yours >= n.mid){ verdict='Above average'; color='var(--good)';
+        desc=`At ${yours}% you're above the midpoint for ${n.name.toLowerCase()}, which typically sits around ${n.mid}%. Healthy. Tightening the funnel could still push you into the top tier (~${n.hi}%).`; }
+      else if(yours >= n.lo){ verdict='Within range, room to grow'; color='var(--warn)';
+        desc=`At ${yours}% you're inside the normal band for ${n.name.toLowerCase()} (${n.lo}%–${n.hi}%) but below the ~${n.mid}% midpoint. There's a clear, realistic path to the upper end.`; }
+      else { verdict='Below your niche range'; color='var(--crit)';
+        desc=`At ${yours}% you're under the typical ${n.lo}%–${n.hi}% range for ${n.name.toLowerCase()}. That usually points to a fixable funnel leak rather than a market problem. Most of the gap is recoverable.`; }
+      tag.textContent=verdict; tag.style.background=color;
+      $('v-title').textContent = `Your store: ${yours}%`;
+      $('v-desc').textContent = desc;
+    }
+
+    // range bar
+    $('r-head').textContent = `${n.name} benchmark range`;
+    $('r-cap').textContent = `Typical 2026 session-to-order conversion for this niche, on a 0–6% scale.`;
+    const lo=pos(n.lo), hi=pos(n.hi);
+    $('band').style.left=lo+'%'; $('band').style.width=(hi-lo)+'%';
+    $('edge-lo').style.left=lo+'%'; $('edge-hi').style.left=hi+'%';
+    const marker=$('marker');
+    if(yours!==null){
+      marker.style.display='block';
+      marker.style.left=pos(yours)+'%';
+      $('marker-lab').textContent='You · '+yours+'%';
+    } else { marker.style.display='none'; }
+
+    // sources
+    const sl=$('src-list'); sl.innerHTML='';
+    n.sources.forEach(s=>{
+      const el=document.createElement('div'); el.className='src-line';
+      el.innerHTML=`<div class="src-name">${s[0]}<small>${s[1]}</small></div><div class="src-val">${s[2]}</div>`;
+      sl.appendChild(el);
+    });
+
+    // context
+    const ctx=$('ctx-list'); ctx.innerHTML='';
+    const items=[
+      `Definitions matter: sessions-to-orders runs 20–40% lower than visitors-to-orders. If your GA4 says ${n.lo}% and a benchmark says ${n.hi}%, you may just be comparing different denominators.`,
+      `Channel mix beats the blended number. Email and returning-visitor traffic convert far higher than paid social; a "low" blended rate can simply mean a top-of-funnel-heavy traffic mix.`,
+      `Mobile carries ~73–78% of traffic and converts lower than desktop, so a mobile-heavy store sits naturally toward the lower end of its niche range.`,
+      `Conversion rate is an output. The fastest wins usually sit upstream: out-of-stock demand, checkout friction, and weak product-page trust signals.`
+    ];
+    items.forEach(t=>{ const li=document.createElement('li'); li.textContent=t; ctx.appendChild(li); });
+
+    // tailor CTA slightly to niche
+    if(['fashion','beauty','supplements','food','pet'].includes(selected)){
+      $('cta-head').textContent='Stop losing your best buyers to "Sold out"';
+      $('cta-body').textContent=`${n.name} stores live and die on restocks and repeat demand. Notify Me! captures shoppers the moment something's out of stock with back-in-stock alerts, preorders, and low-stock nudges, then converts them when it's back. No code, free to start.`;
+    }
+
+    $('step-input').style.display='none';
+    $('step-report').classList.add('show');
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+
+  $('run').addEventListener('click', run);
+  $('cvr').addEventListener('keydown', e=>{ if(e.key==='Enter') run(); });
+  $('restart').addEventListener('click', ()=>{
+    $('step-report').classList.remove('show');
+    $('step-input').style.display='block';
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+})();
+</script>
+</body>
+</html>
