@@ -77,13 +77,13 @@
   .rangewrap{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:26px;margin-bottom:22px;}
   .rangewrap h3{font-size:15px;font-weight:700;margin-bottom:4px;}
   .rangewrap .cap{font-size:13px;color:var(--ink-soft);margin-bottom:26px;}
-  .scale{position:relative;height:14px;border-radius:10px;background:linear-gradient(90deg,#FCE4E4 0%,#FDEFD6 45%,#DBF3E7 100%);margin:34px 0 8px;}
+  .scale{position:relative;height:14px;border-radius:10px;background:linear-gradient(90deg,#FCE4E4 0%,#FDEFD6 45%,#DBF3E7 100%);margin:38px 0 8px;}
   .band{position:absolute;top:0;bottom:0;background:var(--blue);opacity:.18;border-radius:4px;}
   .band-edge{position:absolute;top:-6px;bottom:-6px;width:2px;background:var(--blue);}
-  .marker{position:absolute;top:-34px;transform:translateX(-50%);text-align:center;}
-  .marker .dot{width:16px;height:16px;border-radius:50%;background:var(--ink);border:3px solid #fff;box-shadow:0 0 0 2px var(--ink);margin:0 auto;position:relative;top:24px;}
+  .marker{position:absolute;top:-36px;transform:translateX(-50%);text-align:center;}
+  .marker .dot{width:15px;height:15px;border-radius:50%;background:var(--ink);border:3px solid #fff;box-shadow:0 0 0 2px var(--ink);margin:6px auto 0;position:relative;top:23px;}
   .marker .lab{font-family:var(--mono);font-size:12px;font-weight:600;white-space:nowrap;background:var(--ink);color:#fff;padding:3px 8px;border-radius:6px;}
-  .scale-ticks{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;color:var(--ink-soft);margin-top:8px;}
+  .scale-ticks{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;color:var(--ink-soft);margin-top:22px;}
   .legend{display:flex;gap:20px;flex-wrap:wrap;margin-top:20px;font-size:13px;color:var(--ink-soft);}
   .legend span{display:inline-flex;align-items:center;gap:7px;}
   .legend i{width:12px;height:12px;border-radius:3px;display:inline-block;}
@@ -115,8 +115,9 @@
   .cta-ghost{font-family:var(--sans);font-weight:600;font-size:15px;padding:14px 24px;background:transparent;color:#fff;border:1.5px solid #2A3447;border-radius:10px;text-decoration:none;display:inline-block;transition:border-color .15s;}
   .cta-ghost:hover{border-color:var(--blue);}
 
-  .restart{margin-top:22px;text-align:center;}
-  .restart button{background:none;border:none;font-family:var(--mono);font-size:13px;color:var(--ink-soft);cursor:pointer;text-decoration:underline;}
+  .restart{margin:0 0 22px;text-align:center;}
+  .restart button{background:var(--paper);border:1.5px solid var(--line);font-family:var(--sans);font-size:14px;font-weight:600;color:var(--ink);cursor:pointer;padding:12px 22px;border-radius:10px;transition:border-color .15s,background .15s;}
+  .restart button:hover{border-color:var(--blue);background:var(--blue-tint);color:var(--blue);}
 
   /* footer */
   footer{border-top:1px solid var(--line);margin-top:20px;padding:28px 0 40px;}
@@ -210,6 +211,8 @@
       <ul id="ctx-list"></ul>
     </div>
 
+    <div class="restart"><button id="restart">↺ Check another niche</button></div>
+
     <div class="cta">
       <h3 id="cta-head">Recover the demand you're already losing</h3>
       <p id="cta-body">Most stores leak their easiest conversions at one point: a sold-out product. Notify Me! captures that demand with back-in-stock alerts, preorders, and low-stock nudges, then converts it when inventory returns. No code, free to start.</p>
@@ -218,8 +221,6 @@
         <a class="cta-ghost" href="https://notify-me.io/tools" target="_blank" rel="noopener">See all free tools</a>
       </div>
     </div>
-
-    <div class="restart"><button id="restart">↺ Check another niche</button></div>
   </section>
 
   <footer>
