@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Where's Your Profit Leaking? (2026) | Notify Me!</title>
+<meta name="description" content="Profitable on paper, broke in the bank? Most Shopify stores leak margin in five predictable places. Answer a few questions to see which leak is most likely draining your store, and how to plug it. Free.">
+<meta property="og:title" content="Where's Your Profit Leaking?">
+<meta property="og:description" content="Find which of the 5 silent margin leaks is most likely draining your store, and how to fix it.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=PT+Mono&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#003BAF; --blue-deep:#002E89; --blue-soft:#E3EAF8; --blue-tint:#F4F7FC;
+    --ink:#101828; --ink-soft:#475467; --paper:#FFFFFF; --bg:#F7F9FC;
+    --line:#E4E9F2; --line-soft:#EEF2F8;
+    --crit:#E5484D; --warn:#F2A93B; --good:#1FAE6B;
+    --sans:"Inter",system-ui,-apple-system,sans-serif; --mono:"PT Mono",ui-monospace,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;}
+  body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 20px;}
+
+  .bar{padding:22px 0;display:flex;align-items:center;justify-content:space-between;}
+  .brand{display:flex;align-items:center;gap:9px;text-decoration:none;}
+  .bell{width:30px;height:30px;background:var(--blue);border-radius:8px;display:flex;align-items:center;justify-content:center;flex:0 0 auto;}
+  .bell svg{width:20px;height:20px;}
+  .brand-name{font-weight:800;font-size:18px;letter-spacing:-0.01em;color:var(--ink);}
+  .brand-name i{color:var(--blue);font-style:italic;}
+  .bar-cta{font-size:13px;font-weight:600;text-decoration:none;color:var(--blue);border:1.5px solid var(--line);padding:8px 14px;border-radius:8px;transition:border-color .15s,background .15s;}
+  .bar-cta:hover{border-color:var(--blue);background:var(--blue-tint);}
+
+  .hero{padding:30px 0 8px;}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;color:var(--blue);background:var(--blue-soft);padding:6px 14px;border-radius:999px;margin-bottom:20px;}
+  h1{font-size:clamp(30px,5.8vw,46px);line-height:1.07;letter-spacing:-0.03em;font-weight:800;}
+  h1 span{color:var(--blue);}
+  .sub{margin-top:18px;font-size:18px;color:var(--ink-soft);max-width:58ch;}
+
+  .explainer{margin-top:24px;background:var(--blue-tint);border:1px solid var(--blue-soft);border-radius:14px;padding:20px 22px;}
+  .explainer h2{font-size:15px;font-weight:700;margin-bottom:8px;}
+  .explainer p{font-size:14px;color:var(--ink-soft);}
+  .explainer b{color:var(--ink);}
+
+  .panel{margin-top:22px;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:26px;box-shadow:0 4px 24px rgba(16,24,40,.05);}
+  .q{margin-bottom:22px;}
+  .q:last-of-type{margin-bottom:24px;}
+  .q .qt{font-size:15px;font-weight:600;margin-bottom:10px;}
+  .q .qh{font-size:13px;color:var(--ink-soft);margin:-6px 0 12px;}
+  .opts{display:flex;gap:10px;flex-wrap:wrap;}
+  .opt{flex:1 1 auto;min-width:100px;padding:13px 16px;border:1.5px solid var(--line);border-radius:10px;background:var(--bg);cursor:pointer;font-family:var(--sans);font-size:14px;font-weight:600;color:var(--ink);text-align:center;transition:border-color .15s,background .15s;}
+  .opt:hover{border-color:var(--blue);background:var(--blue-tint);}
+  .opt.sel{border-color:var(--blue);background:var(--blue-soft);box-shadow:0 0 0 3px var(--blue-soft);}
+
+  .btn{font-family:var(--sans);font-weight:600;font-size:15px;padding:15px 26px;border:none;cursor:pointer;background:var(--blue);color:#fff;border-radius:10px;transition:background .15s,transform .1s;width:100%;}
+  .btn:hover{background:var(--blue-deep);}
+  .btn:active{transform:scale(.99);}
+  .err{color:var(--crit);font-size:13px;margin-top:12px;font-family:var(--mono);display:none;}
+
+  .report{display:none;padding:8px 0 50px;}
+  .report.show{display:block;}
+
+  .top-leak{border-radius:18px;padding:30px;margin-bottom:20px;box-shadow:0 4px 24px rgba(16,24,40,.05);color:#fff;background:linear-gradient(135deg,#E5484D,#C8353A);}
+  .top-leak.warn{background:linear-gradient(135deg,#F2A93B,#E08C1A);}
+  .top-leak.good{background:linear-gradient(135deg,#1FAE6B,#15915A);}
+  .top-leak .tag{font-family:var(--mono);font-size:12px;opacity:.85;letter-spacing:.05em;}
+  .top-leak h2{font-size:26px;margin-top:8px;letter-spacing:-0.02em;}
+  .top-leak p{font-size:15px;opacity:.94;margin-top:10px;}
+
+  .ranking{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:24px;margin-bottom:20px;}
+  .ranking h3{font-size:15px;font-weight:700;margin-bottom:6px;}
+  .ranking .rsub{font-size:13px;color:var(--ink-soft);margin-bottom:16px;}
+  .lk{padding:16px 0;border-top:1px solid var(--line-soft);}
+  .lk:first-of-type{border-top:none;padding-top:0;}
+  .lk-top{display:flex;align-items:center;gap:12px;margin-bottom:8px;}
+  .lk-rank{font-family:var(--mono);font-size:12px;font-weight:600;color:#fff;width:24px;height:24px;border-radius:7px;display:flex;align-items:center;justify-content:center;flex:0 0 auto;}
+  .lk-name{font-size:15px;font-weight:600;flex:1;}
+  .lk-sev{font-family:var(--mono);font-size:10px;font-weight:500;padding:3px 9px;border-radius:6px;color:#fff;}
+  .lk-bar{height:8px;background:var(--line-soft);border-radius:10px;overflow:hidden;}
+  .lk-fill{height:100%;border-radius:10px;transition:width .9s cubic-bezier(.2,.8,.2,1);}
+  .lk-fix{font-size:13px;color:var(--ink-soft);margin-top:9px;padding-left:36px;}
+  .lk-fix b{color:var(--ink);}
+
+  .caveat{font-size:13px;color:var(--ink-soft);background:var(--paper);border:1px dashed var(--line);border-radius:12px;padding:16px 18px;margin-bottom:22px;}
+  .caveat b{color:var(--ink);}
+
+  .restart{margin:0 0 22px;text-align:center;}
+  .restart button{background:var(--paper);border:1.5px solid var(--line);font-family:var(--sans);font-size:14px;font-weight:600;color:var(--ink);cursor:pointer;padding:12px 22px;border-radius:10px;transition:border-color .15s,background .15s;}
+  .restart button:hover{border-color:var(--blue);background:var(--blue-tint);color:var(--blue);}
+
+  footer{border-top:1px solid var(--line);margin-top:20px;padding:28px 0 40px;}
+  .foot-row{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+  .foot-links{display:flex;gap:18px;flex-wrap:wrap;}
+  .foot-links a{font-size:13px;color:var(--ink-soft);text-decoration:none;}
+  .foot-links a:hover{color:var(--blue);}
+  .foot-copy{font-family:var(--mono);font-size:11px;color:#98A2B3;margin-top:14px;}
+  .foot-sources{font-size:12px;color:var(--ink-soft);margin-top:14px;line-height:1.7;}
+
+  @media (max-width:560px){.panel{padding:20px;}.lk-fix{padding-left:0;}}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="bar">
+    <a class="brand" href="https://notify-me.io" target="_blank" rel="noopener">
+      <span class="bell"><svg viewBox="0 0 48 48" fill="#fff" xmlns="http://www.w3.org/2000/svg"><path d="M24 13c-7.2 0-11 6.4-11 18.5h5.2C18.2 21 20 18.2 24 18.2s5.8 2.8 5.8 13.3H35C35 19.4 31.2 13 24 13Z"/><path d="M17.4 33.6a6.6 6.6 0 0 0 13.2 0Z"/></svg></span>
+      <span class="brand-name">Notify <i>Me!</i></span>
+    </a>
+    <a class="bar-cta" href="https://notify-me.io/tools" target="_blank" rel="noopener">More free tools →</a>
+  </div>
+
+  <section class="hero" id="step-input">
+    <div class="eyebrow">Profitable on paper, thin in the bank?</div>
+    <h1>Find where your profit<br>is <span>quietly leaking.</span></h1>
+    <p class="sub">Sales look fine, but the money never seems to be there. That's because margin leaks in five predictable places, and most merchants never look at all five together. Answer a few questions and see which leak is most likely draining your store.</p>
+
+    <div class="explainer">
+      <h2>The five places profit hides</h2>
+      <p>Every order quietly loses margin to some mix of: <b>payment & platform fees</b>, <b>shipping you absorb</b>, <b>discounts</b>, <b>returns & refunds</b>, and <b>wasted ad spend</b>. Each feels small per order. Together they're often the gap between "we're growing" and "where did the money go." This ranks which is most likely hurting <i>you</i>.</p>
+    </div>
+
+    <div class="panel">
+      <div class="q">
+        <div class="qt">1. Do you know your true take-home per order, after every fee?</div>
+        <div class="qh">Payment processing, transaction fees, app fees, the lot.</div>
+        <div class="opts" data-q="fees">
+          <button class="opt" data-v="no">No idea</button>
+          <button class="opt" data-v="rough">Rough idea</button>
+          <button class="opt" data-v="yes">Yes, precisely</button>
+        </div>
+      </div>
+      <div class="q">
+        <div class="qt">2. How do you handle shipping?</div>
+        <div class="qh">Absorbing shipping eats margin fast if your AOV is low.</div>
+        <div class="opts" data-q="ship">
+          <button class="opt" data-v="free">Free shipping, no minimum</button>
+          <button class="opt" data-v="threshold">Free over a threshold</button>
+          <button class="opt" data-v="charge">Customer pays shipping</button>
+        </div>
+      </div>
+      <div class="q">
+        <div class="qt">3. How often do you run discounts / promos?</div>
+        <div class="qh">Frequent discounting trains customers to never pay full price.</div>
+        <div class="opts" data-q="disc">
+          <button class="opt" data-v="always">Almost always something on</button>
+          <button class="opt" data-v="sometimes">Now and then</button>
+          <button class="opt" data-v="rare">Rarely</button>
+        </div>
+      </div>
+      <div class="q">
+        <div class="qt">4. What's your return / refund rate like?</div>
+        <div class="qh">Returns cost you the refund plus shipping, restocking, and lost margin.</div>
+        <div class="opts" data-q="returns">
+          <button class="opt" data-v="high">High (fashion-level, 20%+)</button>
+          <button class="opt" data-v="mid">Moderate</button>
+          <button class="opt" data-v="low">Low</button>
+        </div>
+      </div>
+      <div class="q">
+        <div class="qt">5. How much of your sales rely on paid ads?</div>
+        <div class="qh">Rising ad costs can quietly push you to losing money per new customer.</div>
+        <div class="opts" data-q="ads">
+          <button class="opt" data-v="heavy">Heavily</button>
+          <button class="opt" data-v="some">Somewhat</button>
+          <button class="opt" data-v="little">Little / organic</button>
+        </div>
+      </div>
+      <div class="q">
+        <div class="qt">6. Do repeat customers make up much of your revenue?</div>
+        <div class="qh">Low repeat rate means you keep paying to acquire, amplifying ad leakage.</div>
+        <div class="opts" data-q="repeat">
+          <button class="opt" data-v="high">Yes, lots of repeats</button>
+          <button class="opt" data-v="some">Some</button>
+          <button class="opt" data-v="low">Mostly one-time buyers</button>
+        </div>
+      </div>
+
+      <button class="btn" id="run">Find my biggest leak</button>
+      <div class="err" id="err">Please answer all six questions.</div>
+    </div>
+  </section>
+
+  <section class="report" id="step-report">
+    <div class="top-leak" id="top-leak">
+      <div class="tag">YOUR MOST LIKELY LEAK</div>
+      <h2 id="tl-name"></h2>
+      <p id="tl-desc"></p>
+    </div>
+
+    <div class="ranking">
+      <h3>All five leaks, ranked for your store</h3>
+      <div class="rsub">Based on your answers, highest likely drain first.</div>
+      <div id="leak-list"></div>
+    </div>
+
+    <div class="caveat">
+      <b>How to read this:</b> this ranks <i>likelihood</i> based on your answers, it doesn't measure dollars from your books. The five leaks are well-established, but the only way to know your real numbers is to check them: your true per-order profit after fees, your actual return rate, your ad cost per new customer, and what discounts do to your effective margin. Use this to decide which one to investigate first, then pull the real figures. Small leaks compound, fixing the top one or two is usually where the money is.</b>
+    </div>
+
+    <div class="restart"><button id="restart">↺ Redo the check</button></div>
+  </section>
+
+  <footer>
+    <div class="foot-row">
+      <a class="brand" href="https://notify-me.io" target="_blank" rel="noopener">
+        <span class="bell"><svg viewBox="0 0 48 48" fill="#fff" xmlns="http://www.w3.org/2000/svg"><path d="M24 13c-7.2 0-11 6.4-11 18.5h5.2C18.2 21 20 18.2 24 18.2s5.8 2.8 5.8 13.3H35C35 19.4 31.2 13 24 13Z"/><path d="M17.4 33.6a6.6 6.6 0 0 0 13.2 0Z"/></svg></span>
+        <span class="brand-name">Notify <i>Me!</i></span>
+      </a>
+      <nav class="foot-links">
+        <a href="https://notify-me.io" target="_blank" rel="noopener">Notify Me!</a>
+        <a href="https://notify-me.io/tools" target="_blank" rel="noopener">Free tools</a>
+      </nav>
+    </div>
+    <div class="foot-sources">
+      <b>The five-leak framework</b> reflects well-established ecommerce unit-economics principles and 2026 reporting on Shopify margins: merchants commonly understate true CAC by counting only ad spend; absorbing shipping at low AOV erodes margin; frequent discounting compresses effective margin (a 20% discount at 40% margin needs ~100% more units to break even); returns carry costs well beyond the refund; and low repeat-purchase rates force repeated acquisition spend. This tool ranks likelihood from your answers, it is not a measurement of your accounts. Confirm with your real numbers.
+    </div>
+    <div class="foot-copy">A free tool by Notify Me!™ · Runs entirely in your browser.</div>
+  </footer>
+</div>
+
+<script>
+(function(){
+  const $ = id => document.getElementById(id);
+  const A={fees:null,ship:null,disc:null,returns:null,ads:null,repeat:null};
+
+  document.querySelectorAll('.opts').forEach(group=>{
+    const q=group.dataset.q;
+    group.querySelectorAll('.opt').forEach(btn=>{
+      btn.onclick=()=>{ A[q]=btn.dataset.v; group.querySelectorAll('.opt').forEach(x=>x.classList.remove('sel')); btn.classList.add('sel'); $('err').style.display='none'; };
+    });
+  });
+
+  function run(){
+    if(Object.values(A).some(v=>v===null)){ $('err').style.display='block'; return; }
+    $('err').style.display='none';
+
+    // score each leak 0-100 (likelihood/severity)
+    const leaks=[];
+
+    // 1. fees / unknown economics
+    let feeScore = A.fees==='no'?80 : A.fees==='rough'?45 : 15;
+    leaks.push({key:'fees', name:'Fees & unknown unit economics', score:feeScore,
+      fix:'<b>Map your true take-home per order:</b> sale price minus COGS, payment processing, transaction and app fees. You can\'t plug leaks you can\'t see, this is the foundation. If you answered "no idea," this is leak zero: fix it first so the others become measurable.'});
+
+    // 2. shipping
+    let shipScore = A.ship==='free'?75 : A.ship==='threshold'?35 : 12;
+    leaks.push({key:'ship', name:'Absorbed shipping costs', score:shipScore,
+      fix:'<b>Set a free-shipping threshold above your AOV</b> instead of blanket free shipping, or pass shipping to the customer. Absorbing it on every low-value order is one of the fastest silent margin drains.'});
+
+    // 3. discounts
+    let discScore = A.disc==='always'?78 : A.disc==='sometimes'?38 : 12;
+    leaks.push({key:'disc', name:'Over-discounting', score:discScore,
+      fix:'<b>Check what a discount really costs:</b> at 40% margin, 20% off needs roughly double the units just to break even. Reserve discounts for specific moments, and never train customers to wait for the next sale.'});
+
+    // 4. returns
+    let retScore = A.returns==='high'?75 : A.returns==='mid'?40 : 12;
+    leaks.push({key:'returns', name:'Returns & refunds', score:retScore,
+      fix:'<b>Attack the top return reason</b> (usually fit/sizing or "not as described") with better product info, photos, and sizing guides. Favor exchanges and store credit over refunds to keep the revenue.'});
+
+    // 5. ad waste (amplified by low repeat)
+    let adBase = A.ads==='heavy'?70 : A.ads==='some'?40 : 12;
+    let repeatPenalty = A.repeat==='low'?20 : A.repeat==='some'?8 : 0;
+    let adScore = Math.min(100, adBase + repeatPenalty);
+    leaks.push({key:'ads', name:'Wasted ad spend & weak retention', score:adScore,
+      fix:'<b>Know your real cost to acquire a customer</b> (all marketing ÷ new customers) and compare it to what they\'re worth over time. ' + (A.repeat==='low'?'Your low repeat rate is the multiplier here, every sale needs fresh ad spend. Owned channels (email, SMS, back-in-stock) turn one-time buyers into repeats and cut this leak most.':'Keep nurturing repeat purchases, they\'re what keep acquisition affordable as ad costs rise.')});
+
+    // sort desc
+    leaks.sort((a,b)=>b.score-a.score);
+
+    // top leak
+    const top=leaks[0];
+    const tl=$('top-leak');
+    const band = top.score>=65?'':top.score>=40?'warn':'good';
+    tl.className='top-leak '+band;
+    if(top.score<40){
+      $('tl-name').textContent='No single glaring leak';
+      $('tl-desc').textContent='Your answers don\'t point to one obvious drain, a good sign your fundamentals are reasonably tight. Still worth confirming the order below with your real numbers; even "small" leaks compound.';
+    } else {
+      $('tl-name').textContent=top.name;
+      $('tl-desc').textContent='This is the leak most likely draining your margin right now, based on your answers. Start here, it\'s where your next profit dollar most likely hides.';
+    }
+
+    // ranking list
+    const ll=$('leak-list'); ll.innerHTML='';
+    const sev = sc => sc>=65?['RISK','var(--crit)']:sc>=40?['WATCH','var(--warn)']:['MINOR','var(--good)'];
+    const rankColor = i => i===0?'var(--crit)':i===1?'var(--warn)':'var(--blue)';
+    leaks.forEach((lk,i)=>{
+      const [lab,col]=sev(lk.score);
+      const fillCol = lk.score>=65?'var(--crit)':lk.score>=40?'var(--warn)':'var(--good)';
+      const d=document.createElement('div'); d.className='lk';
+      d.innerHTML=`
+        <div class="lk-top">
+          <span class="lk-rank" style="background:${rankColor(i)}">${i+1}</span>
+          <span class="lk-name">${lk.name}</span>
+          <span class="lk-sev" style="background:${col};${lab==='WATCH'?'color:var(--ink);':''}">${lab}</span>
+        </div>
+        <div class="lk-bar"><div class="lk-fill" data-w="${lk.score}" style="background:${fillCol}"></div></div>
+        <div class="lk-fix">${lk.fix}</div>`;
+      ll.appendChild(d);
+    });
+    setTimeout(()=>{ document.querySelectorAll('.lk-fill').forEach(f=>{ f.style.width=f.dataset.w+'%'; }); }, 150);
+
+    $('step-input').style.display='none';
+    $('step-report').classList.add('show');
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+
+  $('run').addEventListener('click', run);
+  $('restart').addEventListener('click', ()=>{ $('step-report').classList.remove('show'); $('step-input').style.display='block'; window.scrollTo({top:0,behavior:'smooth'}); });
+})();
+</script>
+</body>
+</html>
