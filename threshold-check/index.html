@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Refund & Chargeback Threshold Checker (2026) | Notify Me!</title>
+<meta name="description" content="A new Mastercard rule (July 24, 2026) flags merchants whose combined refund + chargeback rate tops 5%. Check your store against the Mastercard and Visa 2026 thresholds in seconds. Free.">
+<meta property="og:title" content="Refund & Chargeback Threshold Checker (2026)">
+<meta property="og:description" content="New Mastercard rule counts refunds AND chargebacks together. See if your store is over the line.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=PT+Mono&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#003BAF; --blue-deep:#002E89; --blue-soft:#E3EAF8; --blue-tint:#F4F7FC;
+    --ink:#101828; --ink-soft:#475467; --paper:#FFFFFF; --bg:#F7F9FC;
+    --line:#E4E9F2; --line-soft:#EEF2F8;
+    --crit:#E5484D; --warn:#F2A93B; --good:#1FAE6B;
+    --sans:"Inter",system-ui,-apple-system,sans-serif; --mono:"PT Mono",ui-monospace,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;}
+  body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 20px;}
+
+  .bar{padding:22px 0;display:flex;align-items:center;justify-content:space-between;}
+  .brand{display:flex;align-items:center;gap:9px;text-decoration:none;}
+  .bell{width:30px;height:30px;background:var(--blue);border-radius:8px;display:flex;align-items:center;justify-content:center;flex:0 0 auto;}
+  .bell svg{width:20px;height:20px;}
+  .brand-name{font-weight:800;font-size:18px;letter-spacing:-0.01em;color:var(--ink);}
+  .brand-name i{color:var(--blue);font-style:italic;}
+  .bar-cta{font-size:13px;font-weight:600;text-decoration:none;color:var(--blue);border:1.5px solid var(--line);padding:8px 14px;border-radius:8px;transition:border-color .15s,background .15s;}
+  .bar-cta:hover{border-color:var(--blue);background:var(--blue-tint);}
+
+  .hero{padding:30px 0 8px;}
+  .countdown{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;color:#fff;background:var(--blue);padding:6px 14px;border-radius:999px;margin-bottom:20px;}
+  .countdown.live{background:var(--ink);}
+  .countdown b{font-weight:500;}
+  h1{font-size:clamp(30px,5.8vw,46px);line-height:1.07;letter-spacing:-0.03em;font-weight:800;}
+  h1 span{color:var(--blue);}
+  .sub{margin-top:18px;font-size:18px;color:var(--ink-soft);max-width:58ch;}
+
+  /* explainer */
+  .explainer{margin-top:24px;background:var(--blue-tint);border:1px solid var(--blue-soft);border-radius:14px;padding:20px 22px;}
+  .explainer h2{font-size:15px;font-weight:700;margin-bottom:8px;}
+  .explainer p{font-size:14px;color:var(--ink-soft);margin-bottom:10px;}
+  .explainer p:last-child{margin-bottom:0;}
+  .explainer b{color:var(--ink);}
+  .explainer .keyrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;}
+  .keychip{flex:1 1 220px;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:12px 14px;}
+  .keychip .t{font-family:var(--mono);font-size:11px;color:var(--ink-soft);margin-bottom:4px;}
+  .keychip .v{font-size:14px;font-weight:600;}
+  .keychip .v b{color:var(--blue);}
+
+  .panel{margin-top:22px;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:26px;box-shadow:0 4px 24px rgba(16,24,40,.05);}
+  .panel h2{font-size:16px;font-weight:700;margin-bottom:4px;}
+  .panel .phint{font-size:13px;color:var(--ink-soft);margin-bottom:18px;}
+  .field{margin-bottom:18px;}
+  .field:last-of-type{margin-bottom:22px;}
+  .field-label{font-size:14px;font-weight:600;margin-bottom:4px;display:block;}
+  .field-hint{font-size:13px;color:var(--ink-soft);margin-bottom:10px;}
+  .num{width:100%;font-family:var(--mono);font-size:16px;padding:15px 16px;border:1.5px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);outline:none;transition:border-color .15s,box-shadow .15s,background .15s;}
+  .num:focus{border-color:var(--blue);background:var(--paper);box-shadow:0 0 0 4px var(--blue-soft);}
+  .num::placeholder{color:#98A2B3;}
+  .btn{font-family:var(--sans);font-weight:600;font-size:15px;padding:15px 26px;border:none;cursor:pointer;background:var(--blue);color:#fff;border-radius:10px;transition:background .15s,transform .1s;width:100%;}
+  .btn:hover{background:var(--blue-deep);}
+  .btn:active{transform:scale(.99);}
+  .err{color:var(--crit);font-size:13px;margin-top:12px;font-family:var(--mono);display:none;}
+
+  .report{display:none;padding:8px 0 50px;}
+  .report.show{display:block;}
+
+  .gauge{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:26px;margin-bottom:16px;box-shadow:0 4px 24px rgba(16,24,40,.05);}
+  .gauge .top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:6px;}
+  .gauge .gname{font-size:15px;font-weight:700;}
+  .gauge .gname small{display:block;font-weight:400;color:var(--ink-soft);font-family:var(--mono);font-size:11px;margin-top:3px;}
+  .gauge .grate{font-size:30px;font-weight:800;letter-spacing:-0.02em;white-space:nowrap;}
+  .gauge .grate.crit{color:var(--crit);} .gauge .grate.warn{color:var(--warn);} .gauge .grate.good{color:var(--good);}
+  .meter{position:relative;height:12px;background:var(--line-soft);border-radius:10px;margin:18px 0 8px;overflow:hidden;}
+  .meter-fill{position:absolute;top:0;left:0;bottom:0;border-radius:10px;transition:width .9s cubic-bezier(.2,.8,.2,1);}
+  .meter-line{position:absolute;top:-5px;bottom:-5px;width:2px;background:var(--ink);}
+  .meter-line::after{content:"limit";position:absolute;top:-16px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:9px;color:var(--ink);}
+  .gauge .verdict{font-size:14px;margin-top:14px;}
+  .gauge .verdict b{font-weight:700;}
+
+  .steps{background:var(--blue-tint);border:1px solid var(--blue-soft);border-radius:16px;padding:24px;margin:16px 0 22px;}
+  .steps h3{font-size:15px;font-weight:700;margin-bottom:12px;}
+  .steps ul{list-style:none;}
+  .steps li{font-size:14px;color:var(--ink-soft);padding:7px 0 7px 24px;position:relative;}
+  .steps li::before{content:"";position:absolute;left:0;top:13px;width:8px;height:8px;border-radius:50%;background:var(--blue);}
+  .steps li b{color:var(--ink);}
+
+  .caveat{font-size:13px;color:var(--ink-soft);background:var(--paper);border:1px dashed var(--line);border-radius:12px;padding:16px 18px;margin-bottom:22px;}
+  .caveat b{color:var(--ink);}
+
+  .restart{margin:0 0 22px;text-align:center;}
+  .restart button{background:var(--paper);border:1.5px solid var(--line);font-family:var(--sans);font-size:14px;font-weight:600;color:var(--ink);cursor:pointer;padding:12px 22px;border-radius:10px;transition:border-color .15s,background .15s;}
+  .restart button:hover{border-color:var(--blue);background:var(--blue-tint);color:var(--blue);}
+
+  footer{border-top:1px solid var(--line);margin-top:20px;padding:28px 0 40px;}
+  .foot-row{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+  .foot-links{display:flex;gap:18px;flex-wrap:wrap;}
+  .foot-links a{font-size:13px;color:var(--ink-soft);text-decoration:none;}
+  .foot-links a:hover{color:var(--blue);}
+  .foot-copy{font-family:var(--mono);font-size:11px;color:#98A2B3;margin-top:14px;}
+  .foot-sources{font-size:12px;color:var(--ink-soft);margin-top:14px;line-height:1.7;}
+
+  @media (max-width:560px){.panel{padding:20px;}}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="bar">
+    <a class="brand" href="https://notify-me.io" target="_blank" rel="noopener">
+      <span class="bell"><svg viewBox="0 0 48 48" fill="#fff" xmlns="http://www.w3.org/2000/svg"><path d="M24 13c-7.2 0-11 6.4-11 18.5h5.2C18.2 21 20 18.2 24 18.2s5.8 2.8 5.8 13.3H35C35 19.4 31.2 13 24 13Z"/><path d="M17.4 33.6a6.6 6.6 0 0 0 13.2 0Z"/></svg></span>
+      <span class="brand-name">Notify <i>Me!</i></span>
+    </a>
+    <a class="bar-cta" href="https://notify-me.io/tools" target="_blank" rel="noopener">More free tools →</a>
+  </div>
+
+  <!-- INPUT -->
+  <section class="hero" id="step-input">
+    <div class="countdown" id="countdown"><b>Loading…</b></div>
+    <h1>Are your refunds about to<br><span>get your store flagged?</span></h1>
+    <p class="sub">A new card-network rule counts your refunds and chargebacks <em>together</em>. Cross the line and your payment processor is required to investigate you. Check your store in 30 seconds.</p>
+
+    <!-- short plain-language explainer -->
+    <div class="explainer">
+      <h2>What's this about, in plain English</h2>
+      <p>From <b>July 24, 2026</b>, Mastercard requires your payment processor to investigate any store whose <b>refunds + chargebacks combined</b> go over <b>5%</b> of orders in a rolling 30-day window (once you've done 500+ orders). The catch: it counts <b>normal refunds too</b>, not just chargebacks, so a healthy store with lots of returns can get caught.</p>
+      <p>Visa has a separate, stricter rule: <b>fraud + chargebacks</b> over <b>1.5%</b> (live since April 2026). This tool checks your numbers against both.</p>
+      <div class="keyrow">
+        <div class="keychip"><div class="t">MASTERCARD LIMIT</div><div class="v"><b>5%</b> · refunds + chargebacks</div></div>
+        <div class="keychip"><div class="t">VISA VAMP LIMIT</div><div class="v"><b>1.5%</b> · fraud + chargebacks</div></div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Your last 30 days</h2>
+      <div class="phint">Pull these from Shopify Analytics / your payments dashboard. Everything is calculated in your browser, nothing is sent anywhere.</div>
+      <div class="field">
+        <label class="field-label" for="orders">Total orders (paid transactions)</label>
+        <div class="field-hint">Number of successful orders in the last 30 days.</div>
+        <input class="num" id="orders" type="text" inputmode="numeric" placeholder="1200">
+      </div>
+      <div class="field">
+        <label class="field-label" for="refunds">Refunds issued</label>
+        <div class="field-hint">Count of orders you refunded (full or partial counts as one).</div>
+        <input class="num" id="refunds" type="text" inputmode="numeric" placeholder="80">
+      </div>
+      <div class="field">
+        <label class="field-label" for="chargebacks">Chargebacks / disputes</label>
+        <div class="field-hint">Card disputes opened against you in the period.</div>
+        <input class="num" id="chargebacks" type="text" inputmode="numeric" placeholder="6">
+      </div>
+      <div class="field">
+        <label class="field-label" for="fraud">Fraud-flagged transactions <span style="font-weight:400;color:#98A2B3;">(optional, for Visa check)</span></label>
+        <div class="field-hint">Orders flagged as fraud / TC40 reports, if you know them. Leave blank if unsure.</div>
+        <input class="num" id="fraud" type="text" inputmode="numeric" placeholder="3">
+      </div>
+      <button class="btn" id="run">Check my thresholds</button>
+      <div class="err" id="err">Enter total orders, refunds, and chargebacks (numbers only).</div>
+    </div>
+  </section>
+
+  <!-- REPORT -->
+  <section class="report" id="step-report">
+    <!-- Mastercard gauge -->
+    <div class="gauge">
+      <div class="top">
+        <div class="gname">Mastercard scam-monitoring trigger<small>Refunds + chargebacks · 5% limit · live July 24, 2026</small></div>
+        <div class="grate" id="mc-rate">0%</div>
+      </div>
+      <div class="meter"><div class="meter-fill" id="mc-fill"></div><div class="meter-line" style="left:71.4%"></div></div>
+      <div class="verdict" id="mc-verdict"></div>
+    </div>
+
+    <!-- Visa gauge -->
+    <div class="gauge">
+      <div class="top">
+        <div class="gname">Visa VAMP threshold<small>Fraud + chargebacks · 1.5% limit · live since April 2026</small></div>
+        <div class="grate" id="visa-rate">0%</div>
+      </div>
+      <div class="meter"><div class="meter-fill" id="visa-fill"></div><div class="meter-line" style="left:60%"></div></div>
+      <div class="verdict" id="visa-verdict"></div>
+    </div>
+
+    <div class="steps">
+      <h3 id="steps-head">How to bring your combined rate down</h3>
+      <ul id="steps-list"></ul>
+    </div>
+
+    <div class="caveat" id="caveat"></div>
+
+    <div class="restart"><button id="restart">↺ Recheck my numbers</button></div>
+  </section>
+
+  <footer>
+    <div class="foot-row">
+      <a class="brand" href="https://notify-me.io" target="_blank" rel="noopener">
+        <span class="bell"><svg viewBox="0 0 48 48" fill="#fff" xmlns="http://www.w3.org/2000/svg"><path d="M24 13c-7.2 0-11 6.4-11 18.5h5.2C18.2 21 20 18.2 24 18.2s5.8 2.8 5.8 13.3H35C35 19.4 31.2 13 24 13Z"/><path d="M17.4 33.6a6.6 6.6 0 0 0 13.2 0Z"/></svg></span>
+        <span class="brand-name">Notify <i>Me!</i></span>
+      </a>
+      <nav class="foot-links">
+        <a href="https://notify-me.io" target="_blank" rel="noopener">Notify Me!</a>
+        <a href="https://notify-me.io/tools" target="_blank" rel="noopener">Free tools</a>
+      </nav>
+    </div>
+    <div class="foot-sources">
+      <b>Sources:</b> Mastercard Scam Merchant Monitoring Program rules effective July 24, 2026 (combined refund + chargeback rate &gt;5% over a rolling 30-day period, min. 500 transactions) as reported by Chargeback Gurus, Solidgate, Chargeflow, and cside; Visa VAMP threshold lowered to 1.5% effective April 1, 2026 (Payment Nerds). The 5% trigger is one of several scam-investigation signals, not an automatic ban; it was designed to catch short-lived scam operators but its triggers can catch legitimate high-return businesses. This tool is informational and is not legal, financial, or compliance advice, confirm specifics with your payment processor.
+    </div>
+    <div class="foot-copy">A free tool by Notify Me!™ · Your numbers never leave your browser.</div>
+  </footer>
+</div>
+
+<script>
+(function(){
+  const $ = id => document.getElementById(id);
+  const DEADLINE = new Date('2026-07-24T00:00:00');
+  const MC_LIMIT = 5.0, VISA_LIMIT = 1.5;
+
+  // ---- date-aware countdown / live banner ----
+  (function(){
+    const now=new Date();
+    const el=$('countdown');
+    const days=Math.ceil((DEADLINE-now)/(1000*60*60*24));
+    if(days>0){
+      el.innerHTML=`<b>New Mastercard rule live in ${days} day${days===1?'':'s'} · July 24, 2026</b>`;
+      el.classList.remove('live');
+    } else {
+      el.innerHTML=`<b>This rule is now live · check your rolling 30-day rate</b>`;
+      el.classList.add('live');
+    }
+  })();
+
+  const pn = v => { const n=parseFloat(String(v).replace(/[^0-9.]/g,'')); return isNaN(n)?null:n; };
+
+  function run(){
+    const orders=pn($('orders').value), refunds=pn($('refunds').value), cbs=pn($('chargebacks').value);
+    const fraud=pn($('fraud').value); // optional
+    if(orders===null||refunds===null||cbs===null||orders<=0){ $('err').style.display='block'; return; }
+    $('err').style.display='none';
+
+    const now=new Date();
+    const days=Math.ceil((DEADLINE-now)/(1000*60*60*24));
+    const isLive = days<=0;
+
+    const mcRate=((refunds+cbs)/orders)*100;
+    const visaBase = (fraud!==null? fraud:0) + cbs;
+    const visaRate=(visaBase/orders)*100;
+    const hasFraud = fraud!==null;
+
+    // ---- Mastercard gauge ----
+    setGauge('mc', mcRate, MC_LIMIT, orders);
+    let mcMsg;
+    const minVol = orders>=500;
+    if(mcRate>=MC_LIMIT){
+      mcMsg = `<b>Over the line.</b> Your combined refund + chargeback rate is ${mcRate.toFixed(2)}%, above the 5% trigger.${minVol?' With 500+ orders, this is exactly the signal that can prompt an investigation.':' You\'re currently under 500 orders/30 days, so the trigger may not apply yet, but the rate itself is high.'} Act before it becomes a pattern.`;
+    } else if(mcRate>=MC_LIMIT*0.8){
+      mcMsg = `<b>Close.</b> At ${mcRate.toFixed(2)}% you're within striking distance of the 5% line. One bad month of returns could push you over. Build in headroom now.`;
+    } else {
+      mcMsg = `<b>Clear.</b> At ${mcRate.toFixed(2)}% you're comfortably under the 5% trigger. Keep an eye on it monthly, it's a rolling window, not a one-time check.`;
+    }
+    $('mc-verdict').innerHTML=mcMsg;
+
+    // ---- Visa gauge ----
+    if(hasFraud){
+      setGauge('visa', visaRate, VISA_LIMIT, orders);
+      let vMsg;
+      if(visaRate>=VISA_LIMIT) vMsg=`<b>Over the line.</b> Fraud + chargebacks at ${visaRate.toFixed(2)}% exceeds Visa's 1.5% VAMP threshold. This carries penalties and monitoring, prioritize fraud screening and dispute prevention.`;
+      else if(visaRate>=VISA_LIMIT*0.8) vMsg=`<b>Close.</b> At ${visaRate.toFixed(2)}% you're nearing Visa's 1.5% line. Tighten fraud filters before it tips over.`;
+      else vMsg=`<b>Clear.</b> At ${visaRate.toFixed(2)}% you're under Visa's 1.5% threshold.`;
+      $('visa-verdict').innerHTML=vMsg;
+    } else {
+      setGauge('visa', 0, VISA_LIMIT, orders);
+      $('visa-rate').textContent='—';
+      $('visa-rate').className='grate';
+      $('visa-fill').style.width='0%';
+      $('visa-verdict').innerHTML=`<b>Not enough data.</b> Add your fraud-flagged transaction count to check the Visa VAMP threshold (fraud + chargebacks vs 1.5%). Your ${cbs} chargebacks alone are ${((cbs/orders)*100).toFixed(2)}% of orders.`;
+    }
+
+    // ---- steps ----
+    const stepsHead = mcRate>=MC_LIMIT ? 'Priority: get your combined rate under 5%'
+                    : mcRate>=MC_LIMIT*0.8 ? 'Build headroom before you hit 5%'
+                    : 'Stay clear of the thresholds';
+    $('steps-head').textContent=stepsHead;
+    const steps=[
+      `<b>Cut refunds at the source.</b> Refunds count toward the Mastercard 5%. Offer exchanges or store credit as the default path, exchange-first flows retain a big share of revenue that would otherwise be a refund (and a refund that counts against you).`,
+      `<b>Stop disputes becoming chargebacks.</b> Clear billing descriptors, fast email support, and chargeback-alert services let you refund or resolve before a formal dispute is filed.`,
+      `<b>Fix the top refund reason.</b> Wrong size, item-not-as-described, and shipping damage drive most returns. Better product info, sizing guides, and photos cut the rate directly.`,
+      `<b>Watch it as a rolling window.</b> The limit checks the trailing 30 days continuously, so a single spike (a sale, a viral product, a supplier issue) can trip it. Check monthly, not once.`,
+      `<b>Tell your processor before big changes.</b> A planned promo, new market, or product launch that will spike volume or returns, flag it to your acquirer so a spike doesn't look like scam activity.`
+    ];
+    const sl=$('steps-list'); sl.innerHTML='';
+    steps.forEach(t=>{ const li=document.createElement('li'); li.innerHTML=t; sl.appendChild(li); });
+
+    // caveat (date-aware)
+    $('caveat').innerHTML = (isLive
+      ? `<b>This rule is now in effect.</b> `
+      : `<b>This takes effect July 24, 2026 (${days} day${days===1?'':'s'} away).</b> `)
+      + `The 5% combined rate is one of several signals that can trigger an investigation, not an automatic ban, and it's aimed at scam operators. But legitimate high-return stores (fashion, subscriptions) can get caught, so it's worth staying well under it. This is informational, not compliance advice; confirm specifics with your payment processor.`;
+
+    $('step-input').style.display='none';
+    $('step-report').classList.add('show');
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+
+  function setGauge(prefix, rate, limit, orders){
+    const rateEl=$(prefix+'-rate'), fillEl=$(prefix+'-fill');
+    rateEl.textContent=rate.toFixed(2)+'%';
+    // scale: limit sits at a fixed % of the meter; mc limit 5% at 71.4%, visa 1.5% at 60%
+    const limitPos = prefix==='mc'?71.4:60;
+    const fillPct = Math.min((rate/limit)*limitPos, 100);
+    fillEl.style.width=fillPct+'%';
+    const cls = rate>=limit?'crit':rate>=limit*0.8?'warn':'good';
+    rateEl.className='grate '+cls;
+    fillEl.style.background = cls==='crit'?'var(--crit)':cls==='warn'?'var(--warn)':'var(--good)';
+  }
+
+  $('run').addEventListener('click', run);
+  ['orders','refunds','chargebacks','fraud'].forEach(id=>$(id).addEventListener('keydown',e=>{ if(e.key==='Enter') run(); }));
+  $('restart').addEventListener('click', ()=>{
+    $('step-report').classList.remove('show');
+    $('step-input').style.display='block';
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+})();
+</script>
+</body>
+</html>
