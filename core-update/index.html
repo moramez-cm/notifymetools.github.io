@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Google Core Update Exposure Checker (2026) | Notify Me!</title>
+<meta name="description" content="Google's 2026 core updates are burying stores with thin or duplicated product content, while original-content stores gained. Answer 6 questions to see how exposed your store is, and how to fix it. Free.">
+<meta property="og:title" content="Google Core Update Exposure Checker (2026)">
+<meta property="og:description" content="See how exposed your store is to Google's content-quality crackdown, and exactly what to fix.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=PT+Mono&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#003BAF; --blue-deep:#002E89; --blue-soft:#E3EAF8; --blue-tint:#F4F7FC;
+    --ink:#101828; --ink-soft:#475467; --paper:#FFFFFF; --bg:#F7F9FC;
+    --line:#E4E9F2; --line-soft:#EEF2F8;
+    --crit:#E5484D; --warn:#F2A93B; --good:#1FAE6B;
+    --sans:"Inter",system-ui,-apple-system,sans-serif; --mono:"PT Mono",ui-monospace,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;}
+  body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 20px;}
+
+  .bar{padding:22px 0;display:flex;align-items:center;justify-content:space-between;}
+  .brand{display:flex;align-items:center;gap:9px;text-decoration:none;}
+  .bell{width:30px;height:30px;background:var(--blue);border-radius:8px;display:flex;align-items:center;justify-content:center;flex:0 0 auto;}
+  .bell svg{width:20px;height:20px;}
+  .brand-name{font-weight:800;font-size:18px;letter-spacing:-0.01em;color:var(--ink);}
+  .brand-name i{color:var(--blue);font-style:italic;}
+  .bar-cta{font-size:13px;font-weight:600;text-decoration:none;color:var(--blue);border:1.5px solid var(--line);padding:8px 14px;border-radius:8px;transition:border-color .15s,background .15s;}
+  .bar-cta:hover{border-color:var(--blue);background:var(--blue-tint);}
+
+  .hero{padding:30px 0 8px;}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;color:var(--blue);background:var(--blue-soft);padding:6px 14px;border-radius:999px;margin-bottom:20px;}
+  h1{font-size:clamp(30px,5.8vw,46px);line-height:1.07;letter-spacing:-0.03em;font-weight:800;}
+  h1 span{color:var(--blue);}
+  .sub{margin-top:18px;font-size:18px;color:var(--ink-soft);max-width:58ch;}
+
+  .explainer{margin-top:24px;background:var(--blue-tint);border:1px solid var(--blue-soft);border-radius:14px;padding:20px 22px;}
+  .explainer h2{font-size:15px;font-weight:700;margin-bottom:8px;}
+  .explainer p{font-size:14px;color:var(--ink-soft);}
+  .explainer b{color:var(--ink);}
+
+  .panel{margin-top:22px;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:26px;box-shadow:0 4px 24px rgba(16,24,40,.05);}
+  .q{margin-bottom:22px;}
+  .q:last-of-type{margin-bottom:24px;}
+  .q .qt{font-size:15px;font-weight:600;margin-bottom:10px;}
+  .q .qh{font-size:13px;color:var(--ink-soft);margin:-6px 0 12px;}
+  .opts{display:flex;gap:10px;flex-wrap:wrap;}
+  .opt{flex:1 1 auto;min-width:110px;padding:13px 16px;border:1.5px solid var(--line);border-radius:10px;background:var(--bg);cursor:pointer;font-family:var(--sans);font-size:14px;font-weight:600;color:var(--ink);text-align:center;transition:border-color .15s,background .15s;}
+  .opt:hover{border-color:var(--blue);background:var(--blue-tint);}
+  .opt.sel{border-color:var(--blue);background:var(--blue-soft);box-shadow:0 0 0 3px var(--blue-soft);}
+
+  .btn{font-family:var(--sans);font-weight:600;font-size:15px;padding:15px 26px;border:none;cursor:pointer;background:var(--blue);color:#fff;border-radius:10px;transition:background .15s,transform .1s;width:100%;}
+  .btn:hover{background:var(--blue-deep);}
+  .btn:active{transform:scale(.99);}
+  .err{color:var(--crit);font-size:13px;margin-top:12px;font-family:var(--mono);display:none;}
+
+  .report{display:none;padding:8px 0 50px;}
+  .report.show{display:block;}
+
+  .verdict{border-radius:18px;padding:30px;margin-bottom:20px;box-shadow:0 4px 24px rgba(16,24,40,.05);color:#fff;text-align:center;}
+  .verdict.good{background:linear-gradient(135deg,#1FAE6B,#15915A);}
+  .verdict.warn{background:linear-gradient(135deg,#F2A93B,#E08C1A);}
+  .verdict.crit{background:linear-gradient(135deg,#E5484D,#C8353A);}
+  .verdict .score{font-size:58px;font-weight:800;letter-spacing:-0.03em;line-height:1;}
+  .verdict .slabel{font-family:var(--mono);font-size:12px;opacity:.85;margin-top:6px;letter-spacing:.05em;}
+  .verdict h2{font-size:24px;margin-top:14px;letter-spacing:-0.02em;}
+  .verdict p{font-size:15px;opacity:.94;margin-top:8px;max-width:50ch;margin-left:auto;margin-right:auto;}
+
+  .reasons{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:24px;margin-bottom:20px;}
+  .reasons h3{font-size:15px;font-weight:700;margin-bottom:12px;}
+  .rrow{display:flex;gap:12px;font-size:14px;padding:11px 0;border-top:1px solid var(--line-soft);align-items:flex-start;}
+  .rrow:first-of-type{border-top:none;}
+  .rmark{font-family:var(--mono);font-size:10px;font-weight:500;padding:3px 9px;border-radius:6px;height:fit-content;white-space:nowrap;color:#fff;margin-top:1px;}
+  .rmark.risk{background:var(--crit);} .rmark.watch{background:var(--warn);color:var(--ink);} .rmark.ok{background:var(--good);}
+  .rrow .rt{color:var(--ink-soft);} .rrow .rt b{color:var(--ink);}
+
+  .fixes{background:var(--blue-tint);border:1px solid var(--blue-soft);border-radius:16px;padding:24px;margin-bottom:20px;}
+  .fixes h3{font-size:15px;font-weight:700;margin-bottom:12px;}
+  .fixes ul{list-style:none;}
+  .fixes li{font-size:14px;color:var(--ink-soft);padding:8px 0 8px 26px;position:relative;}
+  .fixes li::before{content:"";position:absolute;left:0;top:14px;width:8px;height:8px;border-radius:50%;background:var(--blue);}
+  .fixes li b{color:var(--ink);}
+
+  .selftest{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:22px 24px;margin-bottom:20px;}
+  .selftest h3{font-size:15px;font-weight:700;margin-bottom:8px;}
+  .selftest p{font-size:14px;color:var(--ink-soft);}
+  .selftest b{color:var(--ink);}
+
+  .caveat{font-size:13px;color:var(--ink-soft);background:var(--paper);border:1px dashed var(--line);border-radius:12px;padding:16px 18px;margin-bottom:22px;}
+  .caveat b{color:var(--ink);}
+
+  .restart{margin:0 0 22px;text-align:center;}
+  .restart button{background:var(--paper);border:1.5px solid var(--line);font-family:var(--sans);font-size:14px;font-weight:600;color:var(--ink);cursor:pointer;padding:12px 22px;border-radius:10px;transition:border-color .15s,background .15s;}
+  .restart button:hover{border-color:var(--blue);background:var(--blue-tint);color:var(--blue);}
+
+  footer{border-top:1px solid var(--line);margin-top:20px;padding:28px 0 40px;}
+  .foot-row{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+  .foot-links{display:flex;gap:18px;flex-wrap:wrap;}
+  .foot-links a{font-size:13px;color:var(--ink-soft);text-decoration:none;}
+  .foot-links a:hover{color:var(--blue);}
+  .foot-copy{font-family:var(--mono);font-size:11px;color:#98A2B3;margin-top:14px;}
+  .foot-sources{font-size:12px;color:var(--ink-soft);margin-top:14px;line-height:1.7;}
+
+  @media (max-width:560px){.panel{padding:20px;}}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="bar">
+    <a class="brand" href="https://notify-me.io" target="_blank" rel="noopener">
+      <span class="bell"><svg viewBox="0 0 48 48" fill="#fff" xmlns="http://www.w3.org/2000/svg"><path d="M24 13c-7.2 0-11 6.4-11 18.5h5.2C18.2 21 20 18.2 24 18.2s5.8 2.8 5.8 13.3H35C35 19.4 31.2 13 24 13Z"/><path d="M17.4 33.6a6.6 6.6 0 0 0 13.2 0Z"/></svg></span>
+      <span class="brand-name">Notify <i>Me!</i></span>
+    </a>
+    <a class="bar-cta" href="https://notify-me.io/tools" target="_blank" rel="noopener">More free tools →</a>
+  </div>
+
+  <section class="hero" id="step-input">
+    <div class="eyebrow">Three core updates in 2026 · same target each time</div>
+    <h1>Is your product content<br>about to get <span>buried?</span></h1>
+    <p class="sub">Google's 2026 core updates keep hitting the same thing: stores running thin, keyword-only, or copy-pasted manufacturer descriptions. Meanwhile stores with original content and real trust signals gained. Answer 6 questions to see how exposed you are, and exactly what to fix.</p>
+
+    <div class="explainer">
+      <h2>What's happening, in plain English</h2>
+      <p>Google ran broad core updates in March and May 2026 (more will come). They don't "penalize" you, they recalibrate what ranks. The losers were consistent: <b>duplicated manufacturer copy, thin or keyword-stuffed pages, and stores with no brand story, reviews, or expertise</b>. The winners were stores with <b>original product content and strong trust signals (E-E-A-T)</b>. This checks which side you're on.</p>
+    </div>
+
+    <div class="panel">
+      <div class="q">
+        <div class="qt">1. Where do your product descriptions come from?</div>
+        <div class="qh">The #1 factor. Copy-pasted manufacturer text is duplicated across hundreds of stores.</div>
+        <div class="opts" data-q="desc">
+          <button class="opt" data-v="manufacturer">Mostly manufacturer / supplier copy</button>
+          <button class="opt" data-v="mixed">A mix</button>
+          <button class="opt" data-v="original">Original, written by us</button>
+        </div>
+      </div>
+      <div class="q">
+        <div class="qt">2. Do you have genuine customer reviews on product pages?</div>
+        <div class="qh">Real reviews are a strong trust (E-E-A-T) signal Google now weights heavily.</div>
+        <div class="opts" data-q="reviews">
+          <button class="opt" data-v="lots">Yes, many</button>
+          <button class="opt" data-v="few">A few</button>
+          <button class="opt" data-v="none">None</button>
+        </div>
+      </div>
+      <div class="q">
+        <div class="qt">3. Do you publish a blog / buying guides for SEO traffic?</div>
+        <div class="qh">If yes, the next question matters a lot.</div>
+        <div class="opts" data-q="blog">
+          <button class="opt" data-v="ai">Yes, mostly AI-generated for keywords</button>
+          <button class="opt" data-v="human">Yes, original & researched</button>
+          <button class="opt" data-v="none">No blog</button>
+        </div>
+      </div>
+      <div class="q">
+        <div class="qt">4. Does your site show real expertise & identity? (brand story, named authors, credentials)</div>
+        <div class="qh">Google rewards verifiable people and brands behind the content.</div>
+        <div class="opts" data-q="eeat">
+          <button class="opt" data-v="strong">Strong</button>
+          <button class="opt" data-v="some">Some</button>
+          <button class="opt" data-v="weak">Little / none</button>
+        </div>
+      </div>
+      <div class="q">
+        <div class="qt">5. How many near-identical or very thin pages do you have?</div>
+        <div class="qh">e.g. hundreds of variant pages or "best X" pages with little unique content.</div>
+        <div class="opts" data-q="thin">
+          <button class="opt" data-v="many">Many</button>
+          <button class="opt" data-v="some">Some</button>
+          <button class="opt" data-v="few">Few / none</button>
+        </div>
+      </div>
+      <div class="q">
+        <div class="qt">6. Did your Google traffic drop after late March or late May 2026?</div>
+        <div class="qh">Check Google Search Console around March 27–Apr 8 and from May 21.</div>
+        <div class="opts" data-q="dropped">
+          <button class="opt" data-v="yes">Yes, noticeably</button>
+          <button class="opt" data-v="no">No</button>
+          <button class="opt" data-v="unsure">Haven't checked</button>
+        </div>
+      </div>
+
+      <button class="btn" id="run">Check my exposure</button>
+      <div class="err" id="err">Please answer all six questions.</div>
+    </div>
+  </section>
+
+  <section class="report" id="step-report">
+    <div class="verdict" id="verdict">
+      <div class="score" id="v-score">0</div>
+      <div class="slabel">EXPOSURE SCORE / 100</div>
+      <h2 id="v-title"></h2>
+      <p id="v-desc"></p>
+    </div>
+
+    <div class="reasons">
+      <h3>What's driving your score</h3>
+      <div id="reason-list"></div>
+    </div>
+
+    <div class="selftest">
+      <h3>Do this 1-minute test</h3>
+      <p>Copy a sentence from one of your product descriptions, paste it into Google in "quotes", and search. If dozens of other stores show the same text, that's duplicated manufacturer copy, exactly what core updates demote. Original text returns only your store.</p>
+    </div>
+
+    <div class="fixes">
+      <h3 id="fix-head">How to lower your exposure</h3>
+      <ul id="fix-list"></ul>
+    </div>
+
+    <div class="caveat">
+      <b>How to read this:</b> this is a guided exposure estimate based on your answers, not a scan of your store or your Search Console. A traffic drop after a core update doesn't mean you broke a rule, it means Google now prefers other results, and the fix is honest content improvement, not panic-editing or mass-deleting pages. Recovery typically takes one to two update cycles (months), not days. Check your real before/after data in Google Search Console (compare the weeks before March 27 vs after April 8, and from May 21) to see what actually happened to you.
+    </div>
+
+    <div class="restart"><button id="restart">↺ Redo the check</button></div>
+  </section>
+
+  <footer>
+    <div class="foot-row">
+      <a class="brand" href="https://notify-me.io" target="_blank" rel="noopener">
+        <span class="bell"><svg viewBox="0 0 48 48" fill="#fff" xmlns="http://www.w3.org/2000/svg"><path d="M24 13c-7.2 0-11 6.4-11 18.5h5.2C18.2 21 20 18.2 24 18.2s5.8 2.8 5.8 13.3H35C35 19.4 31.2 13 24 13Z"/><path d="M17.4 33.6a6.6 6.6 0 0 0 13.2 0Z"/></svg></span>
+        <span class="brand-name">Notify <i>Me!</i></span>
+      </a>
+      <nav class="foot-links">
+        <a href="https://notify-me.io" target="_blank" rel="noopener">Notify Me!</a>
+        <a href="https://notify-me.io/tools" target="_blank" rel="noopener">Free tools</a>
+      </nav>
+    </div>
+    <div class="foot-sources">
+      <b>Informed by 2026 Google core-update coverage:</b> March 2026 core update (rolled out Mar 27–Apr 8) and May 2026 core update (from May 21), reported by Search Engine Journal, Lucid Media, Nova Analytics, Launchcodex, ALM Corp and Viha Digital Commerce. Consistent findings: pages with duplicated manufacturer copy, thin/keyword-only content, and weak E-E-A-T lost visibility (drops of 20–80% for the worst cases), while stores with original product content and strong trust signals held or gained 5–12%. A ranking drop is a quality reassessment, not a policy penalty. Figures are industry findings, not a measurement of your store.
+    </div>
+    <div class="foot-copy">A free tool by Notify Me!™ · Runs entirely in your browser.</div>
+  </footer>
+</div>
+
+<script>
+(function(){
+  const $ = id => document.getElementById(id);
+  const A={desc:null,reviews:null,blog:null,eeat:null,thin:null,dropped:null};
+
+  document.querySelectorAll('.opts').forEach(group=>{
+    const q=group.dataset.q;
+    group.querySelectorAll('.opt').forEach(btn=>{
+      btn.onclick=()=>{ A[q]=btn.dataset.v; group.querySelectorAll('.opt').forEach(x=>x.classList.remove('sel')); btn.classList.add('sel'); $('err').style.display='none'; };
+    });
+  });
+
+  function run(){
+    if(Object.values(A).some(v=>v===null)){ $('err').style.display='block'; return; }
+    $('err').style.display='none';
+
+    let s=0; const reasons=[];
+
+    // product descriptions (dominant)
+    if(A.desc==='manufacturer'){ s+=30; reasons.push(['risk','Duplicated manufacturer descriptions','This is the single biggest core-update risk for stores, the same copy lives on hundreds of sites, so Google has no reason to rank yours. Rewriting these is the highest-leverage fix.']); }
+    else if(A.desc==='mixed'){ s+=15; reasons.push(['watch','Mixed description sources','Your duplicated pages are exposed; your original ones are safer. Prioritize rewriting the copy-pasted ones, starting with your best sellers.']); }
+    else { reasons.push(['ok','Original product descriptions','You\'re on the right side of the biggest factor, unique copy is exactly what core updates reward.']); }
+
+    // reviews
+    if(A.reviews==='none'){ s+=14; reasons.push(['risk','No customer reviews','Reviews are a strong trust (E-E-A-T) signal and unique, user-generated content. Their absence weakens product pages in Google\'s reassessment.']); }
+    else if(A.reviews==='few'){ s+=6; reasons.push(['watch','Few reviews','Some trust signal, but thin. More genuine reviews strengthen both ranking and conversion.']); }
+    else { reasons.push(['ok','Plenty of real reviews','Strong trust signal and a steady source of unique content, this helps.']); }
+
+    // blog
+    if(A.blog==='ai'){ s+=20; reasons.push(['risk','AI-generated blog content for keywords','"Scaled content abuse" is the named target of these updates. Mass AI articles without first-hand expertise saw the steepest drops (60–80% in the worst cases).']); }
+    else if(A.blog==='human'){ reasons.push(['ok','Original, researched content','Human content with real expertise largely held or gained, keep doing this.']); }
+    else { reasons.push(['ok','No blog','No content-farm risk from a blog, your exposure is mainly on product/category pages.']); }
+
+    // eeat
+    if(A.eeat==='weak'){ s+=16; reasons.push(['risk','Weak expertise / identity signals','No brand story, named authors, or credentials makes it hard for Google to trust your content over established competitors.']); }
+    else if(A.eeat==='some'){ s+=7; reasons.push(['watch','Partial trust signals','You have some identity signals; strengthening brand story and authorship would help your reassessment.']); }
+    else { reasons.push(['ok','Strong expertise & identity','Verifiable brand and authorship is exactly what Google rewards now.']); }
+
+    // thin pages
+    if(A.thin==='many'){ s+=14; reasons.push(['risk','Many thin / near-identical pages','Site-level patterns matter, a pile of thin pages can drag down even your good pages. Consolidate or enrich them.']); }
+    else if(A.thin==='some'){ s+=6; reasons.push(['watch','Some thin pages','Worth auditing, improve or consolidate the weakest rather than leaving them to weigh on the site.']); }
+    else { reasons.push(['ok','Few thin pages','Clean site-level quality, no dead weight dragging your rankings.']); }
+
+    // already dropped (diagnostic, not added pressure beyond signal)
+    if(A.dropped==='yes'){ s+=6; reasons.push(['risk','You already saw a traffic drop','A drop around the update dates strongly suggests a content-quality reassessment hit you. The fixes below are your recovery path, expect one to two update cycles.']); }
+    else if(A.dropped==='unsure'){ s+=4; reasons.push(['watch','Haven\'t checked Search Console','Do that first, compare the weeks before Mar 27 vs after Apr 8, and from May 21, so you know if this is already affecting you.']); }
+    else { reasons.push(['ok','No drop noticed','Encouraging, but the next core update applies the same standards, so closing any gaps above is still worth it.']); }
+
+    s=Math.max(0,Math.min(100,Math.round(s)));
+
+    let band,title,desc;
+    if(s>=55){ band='crit'; title='High exposure'; desc='Your store carries several of the exact traits these core updates demote, most importantly around original content and trust signals. This is the profile that loses visibility. The upside: these are fixable, and stores that fix them recover and often gain.'; }
+    else if(s>=28){ band='warn'; title='Moderate exposure'; desc='Some real risk, but you\'re not in the worst category. A few focused improvements, starting with your product copy, would meaningfully lower your exposure before the next update.'; }
+    else { band='good'; title='Lower exposure'; desc='Your content profile is relatively aligned with what Google now rewards. Stay on it, core updates keep raising the bar, but you\'re positioned well.'; }
+    const v=$('verdict'); v.className='verdict '+band;
+    $('v-score').textContent=s; $('v-title').textContent=title; $('v-desc').textContent=desc;
+
+    const rl=$('reason-list'); rl.innerHTML='';
+    const order={risk:0,watch:1,ok:2};
+    reasons.sort((a,b)=>order[a[0]]-order[b[0]]).forEach(r=>{
+      const lab=r[0]==='risk'?'RISK':r[0]==='watch'?'WATCH':'GOOD';
+      const d=document.createElement('div'); d.className='rrow';
+      d.innerHTML=`<span class="rmark ${r[0]}">${lab}</span><span class="rt"><b>${r[1]}.</b> ${r[2]}</span>`;
+      rl.appendChild(d);
+    });
+
+    const head = band==='crit'?'Priority fixes, in order':band==='warn'?'Where to focus':'Stay ahead';
+    $('fix-head').textContent=head;
+    const fixes=[];
+    if(A.desc!=='original') fixes.push(`<b>Rewrite product descriptions in your own words.</b> Start with your top sellers. Add real detail manufacturers don\'t: how it fits, who it\'s for, how it compares, first-hand notes. This is the highest-leverage change.`);
+    if(A.reviews!=='lots') fixes.push(`<b>Collect genuine reviews.</b> They add unique content and trust to every product page. Even a simple post-purchase request lifts both ranking signals and conversion.`);
+    if(A.blog==='ai') fixes.push(`<b>Fix or prune AI blog content.</b> Either rebuild thin AI articles with real expertise and first-hand experience, or consolidate them. Don\'t mass-delete, audit page by page.`);
+    if(A.eeat!=='strong') fixes.push(`<b>Show the humans and the brand.</b> Add a real about/brand-story page, named authors with credentials on guides, and visible trust signals (policies, contact, guarantees).`);
+    if(A.thin!=='few') fixes.push(`<b>Thin out the thin pages.</b> Consolidate near-duplicate pages, enrich the ones worth keeping. Site-wide quality affects every page\'s ranking.`);
+    fixes.push(`<b>Don\'t panic-edit.</b> Make genuine improvements, then be patient, recovery usually shows at the next core update, not within days. Diversify traffic (email, social, direct) so you\'re less hostage to one algorithm.`);
+    const fl=$('fix-list'); fl.innerHTML='';
+    fixes.forEach(t=>{ const li=document.createElement('li'); li.innerHTML=t; fl.appendChild(li); });
+
+    $('step-input').style.display='none';
+    $('step-report').classList.add('show');
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+
+  $('run').addEventListener('click', run);
+  $('restart').addEventListener('click', ()=>{ $('step-report').classList.remove('show'); $('step-input').style.display='block'; window.scrollTo({top:0,behavior:'smooth'}); });
+})();
+</script>
+</body>
+</html>
