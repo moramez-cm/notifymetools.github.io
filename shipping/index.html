@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Shipping Threshold Calculator | Notify Me!</title>
+<meta name="description" content="Find the free-shipping threshold that lifts AOV without killing your margin. Enter your numbers and see the real break-even math. Free tool for Shopify merchants by Notify Me!">
+<meta property="og:title" content="Free Shipping Threshold Calculator">
+<meta property="og:description" content="Set a free-shipping bar that grows AOV without eating your margin. Real break-even math.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=PT+Mono&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#003BAF; --blue-deep:#002E89; --blue-soft:#E3EAF8; --blue-tint:#F4F7FC;
+    --ink:#101828; --ink-soft:#475467; --paper:#FFFFFF; --bg:#F7F9FC;
+    --line:#E4E9F2; --line-soft:#EEF2F8;
+    --crit:#E5484D; --warn:#F2A93B; --good:#1FAE6B;
+    --sans:"Inter",system-ui,-apple-system,sans-serif; --mono:"PT Mono",ui-monospace,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;}
+  body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 20px;}
+
+  .bar{padding:22px 0;display:flex;align-items:center;justify-content:space-between;}
+  .brand{display:flex;align-items:center;gap:9px;text-decoration:none;}
+  .bell{width:30px;height:30px;background:var(--blue);border-radius:8px;display:flex;align-items:center;justify-content:center;flex:0 0 auto;}
+  .bell svg{width:20px;height:20px;}
+  .brand-name{font-weight:800;font-size:18px;letter-spacing:-0.01em;color:var(--ink);}
+  .brand-name i{color:var(--blue);font-style:italic;}
+  .bar-cta{font-size:13px;font-weight:600;text-decoration:none;color:var(--blue);border:1.5px solid var(--line);padding:8px 14px;border-radius:8px;transition:border-color .15s,background .15s;}
+  .bar-cta:hover{border-color:var(--blue);background:var(--blue-tint);}
+
+  .hero{padding:30px 0 8px;}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;color:var(--blue);background:var(--blue-soft);padding:6px 14px;border-radius:999px;margin-bottom:20px;}
+  h1{font-size:clamp(32px,6.2vw,50px);line-height:1.06;letter-spacing:-0.03em;font-weight:800;}
+  h1 span{color:var(--blue);}
+  .sub{margin-top:18px;font-size:18px;color:var(--ink-soft);max-width:56ch;}
+
+  .panel{margin-top:30px;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:26px;box-shadow:0 4px 24px rgba(16,24,40,.05);}
+  .field{margin-bottom:20px;}
+  .field:last-of-type{margin-bottom:24px;}
+  .field-label{font-size:14px;font-weight:600;margin-bottom:4px;display:block;}
+  .field-hint{font-size:13px;color:var(--ink-soft);margin-bottom:10px;}
+  .input-wrap{position:relative;}
+  .input-pre,.input-suf{position:absolute;top:50%;transform:translateY(-50%);color:var(--ink-soft);font-family:var(--mono);font-size:15px;pointer-events:none;}
+  .input-pre{left:16px;} .input-suf{right:16px;}
+  .num{width:100%;font-family:var(--mono);font-size:16px;padding:15px 16px;border:1.5px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);outline:none;transition:border-color .15s,box-shadow .15s,background .15s;}
+  .num.pre{padding-left:32px;} .num.suf{padding-right:34px;}
+  .num:focus{border-color:var(--blue);background:var(--paper);box-shadow:0 0 0 4px var(--blue-soft);}
+  .num::placeholder{color:#98A2B3;}
+  .btn{font-family:var(--sans);font-weight:600;font-size:15px;padding:15px 26px;border:none;cursor:pointer;background:var(--blue);color:#fff;border-radius:10px;transition:background .15s,transform .1s;width:100%;}
+  .btn:hover{background:var(--blue-deep);}
+  .btn:active{transform:scale(.99);}
+  .err{color:var(--crit);font-size:13px;margin-top:12px;font-family:var(--mono);display:none;}
+
+  .report{display:none;padding:8px 0 50px;}
+  .report.show{display:block;}
+
+  .headline{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:28px;box-shadow:0 4px 24px rgba(16,24,40,.05);margin-bottom:22px;text-align:center;}
+  .headline .ctx{font-family:var(--mono);font-size:13px;color:var(--blue);margin-bottom:8px;}
+  .headline .big{font-size:52px;font-weight:800;letter-spacing:-0.03em;line-height:1;color:var(--blue);}
+  .headline .note{font-size:15px;color:var(--ink-soft);margin-top:12px;max-width:46ch;margin-left:auto;margin-right:auto;}
+
+  .stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:22px;}
+  .stat{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:20px;}
+  .stat .lab{font-family:var(--mono);font-size:12px;color:var(--ink-soft);margin-bottom:8px;}
+  .stat .val{font-size:26px;font-weight:700;letter-spacing:-0.02em;}
+  .stat .val.warn{color:var(--warn);} .stat .val.crit{color:var(--crit);} .stat .val.good{color:var(--good);}
+  .stat .desc{font-size:13px;color:var(--ink-soft);margin-top:6px;}
+
+  .explain{background:var(--blue-tint);border:1px solid var(--blue-soft);border-radius:16px;padding:24px;margin-bottom:22px;}
+  .explain h3{font-size:15px;font-weight:700;margin-bottom:10px;}
+  .explain ul{list-style:none;}
+  .explain li{font-size:14px;color:var(--ink-soft);padding:7px 0 7px 24px;position:relative;}
+  .explain li::before{content:"";position:absolute;left:0;top:13px;width:8px;height:8px;border-radius:50%;background:var(--blue);}
+  .explain li b{color:var(--ink);}
+
+  .caveat{font-size:13px;color:var(--ink-soft);background:var(--paper);border:1px dashed var(--line);border-radius:12px;padding:16px 18px;margin-bottom:22px;}
+  .caveat b{color:var(--ink);}
+
+  .restart{margin:0 0 22px;text-align:center;}
+  .restart button{background:var(--paper);border:1.5px solid var(--line);font-family:var(--sans);font-size:14px;font-weight:600;color:var(--ink);cursor:pointer;padding:12px 22px;border-radius:10px;transition:border-color .15s,background .15s;}
+  .restart button:hover{border-color:var(--blue);background:var(--blue-tint);color:var(--blue);}
+
+  .cta{background:var(--ink);color:#fff;border-radius:18px;padding:32px;position:relative;overflow:hidden;}
+  .cta::after{content:"";position:absolute;right:-50px;top:-50px;width:200px;height:200px;background:var(--blue);opacity:.3;border-radius:50%;filter:blur(8px);}
+  .cta h3{font-size:23px;letter-spacing:-0.02em;margin-bottom:9px;position:relative;}
+  .cta p{color:#C0CBDC;font-size:15px;max-width:52ch;margin-bottom:20px;position:relative;}
+  .cta-row{display:flex;gap:10px;flex-wrap:wrap;position:relative;}
+  .cta-btn{font-family:var(--sans);font-weight:600;font-size:15px;padding:14px 24px;background:var(--blue);color:#fff;border:none;border-radius:10px;text-decoration:none;display:inline-block;transition:background .15s;}
+  .cta-btn:hover{background:#1A4FC0;}
+  .cta-ghost{font-family:var(--sans);font-weight:600;font-size:15px;padding:14px 24px;background:transparent;color:#fff;border:1.5px solid #2A3447;border-radius:10px;text-decoration:none;display:inline-block;transition:border-color .15s;}
+  .cta-ghost:hover{border-color:var(--blue);}
+
+  footer{border-top:1px solid var(--line);margin-top:20px;padding:28px 0 40px;}
+  .foot-row{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+  .foot-links{display:flex;gap:18px;flex-wrap:wrap;}
+  .foot-links a{font-size:13px;color:var(--ink-soft);text-decoration:none;}
+  .foot-links a:hover{color:var(--blue);}
+  .foot-copy{font-family:var(--mono);font-size:11px;color:#98A2B3;margin-top:14px;}
+
+  @media (max-width:560px){.panel{padding:20px;}.stats{grid-template-columns:1fr;}}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="bar">
+    <a class="brand" href="https://notify-me.io" target="_blank" rel="noopener">
+      <span class="bell"><svg viewBox="0 0 48 48" fill="#fff" xmlns="http://www.w3.org/2000/svg"><path d="M24 13c-7.2 0-11 6.4-11 18.5h5.2C18.2 21 20 18.2 24 18.2s5.8 2.8 5.8 13.3H35C35 19.4 31.2 13 24 13Z"/><path d="M17.4 33.6a6.6 6.6 0 0 0 13.2 0Z"/></svg></span>
+      <span class="brand-name">Notify <i>Me!</i></span>
+    </a>
+    <a class="bar-cta" href="https://apps.shopify.com/back-in-stock-notifications?utm_source=shipping-tool&utm_medium=button&utm_campaign=free-shipping" target="_blank" rel="noopener">Get the app →</a>
+  </div>
+
+  <!-- INPUT -->
+  <section class="hero" id="step-input">
+    <div class="eyebrow">Free tool · honest break-even math</div>
+    <h1>Set a free-shipping bar<br>that <span>grows AOV</span></h1>
+    <p class="sub">"Free shipping over $X" is one of the highest-leverage levers you have, but set it wrong and you just hand away margin. Enter three numbers and see the threshold that pays for itself.</p>
+
+    <div class="panel">
+      <div class="field">
+        <label class="field-label" for="aov">Current average order value (AOV)</label>
+        <div class="field-hint">Your typical order total. Shopify: Analytics → average order value.</div>
+        <div class="input-wrap"><span class="input-pre">$</span><input class="num pre" id="aov" type="text" inputmode="decimal" placeholder="55"></div>
+      </div>
+      <div class="field">
+        <label class="field-label" for="ship">Average shipping cost you pay per order</label>
+        <div class="field-hint">What it actually costs you to ship a typical order.</div>
+        <div class="input-wrap"><span class="input-pre">$</span><input class="num pre" id="ship" type="text" inputmode="decimal" placeholder="8"></div>
+      </div>
+      <div class="field">
+        <label class="field-label" for="margin">Gross margin</label>
+        <div class="field-hint">Roughly what % of each sale is profit before shipping/ads. Most retail: 40–60%.</div>
+        <div class="input-wrap"><input class="num suf" id="margin" type="text" inputmode="decimal" placeholder="50"><span class="input-suf">%</span></div>
+      </div>
+      <button class="btn" id="run">Calculate my threshold</button>
+      <div class="err" id="err">Please fill all three fields with valid numbers.</div>
+    </div>
+  </section>
+
+  <!-- REPORT -->
+  <section class="report" id="step-report">
+    <div class="headline">
+      <div class="ctx">Recommended free-shipping threshold</div>
+      <div class="big" id="h-threshold">$0</div>
+      <div class="note" id="h-note"></div>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="lab">UPLIFT NEEDED PER ORDER</div>
+        <div class="val" id="s-uplift">$0</div>
+        <div class="desc">How much each qualifying order must grow to cover the shipping you're giving away.</div>
+      </div>
+      <div class="stat">
+        <div class="lab">MARGIN $ ON A THRESHOLD ORDER</div>
+        <div class="val" id="s-margin">$0</div>
+        <div class="desc">Your gross profit on an order at the new threshold, after absorbing shipping.</div>
+      </div>
+      <div class="stat">
+        <div class="lab">IF YOU ABSORB SHIPPING AT CURRENT AOV</div>
+        <div class="val" id="s-hit">0%</div>
+        <div class="desc">Share of your gross profit that free shipping would eat if you applied it to today's average order.</div>
+      </div>
+      <div class="stat">
+        <div class="lab">BREAK-EVEN ORDER VALUE</div>
+        <div class="val" id="s-breakeven">$0</div>
+        <div class="desc">The order value where the extra margin exactly covers the free shipping. Your threshold should sit at or above this.</div>
+      </div>
+    </div>
+
+    <div class="explain">
+      <h3>How to read this</h3>
+      <ul id="ex-list"></ul>
+    </div>
+
+    <div class="caveat" id="caveat"></div>
+
+    <div class="restart"><button id="restart">↺ Recalculate</button></div>
+
+    <div class="cta">
+      <h3>The highest-margin order is the one you almost lost</h3>
+      <p>A recovered back-in-stock sale carries no new ad spend and no discount, it's close to pure margin, which is exactly the cushion that makes free shipping affordable. Notify Me! captures that demand automatically. No code, free to start.</p>
+      <div class="cta-row">
+        <a class="cta-btn" href="https://apps.shopify.com/back-in-stock-notifications?utm_source=shipping-tool&utm_medium=cta&utm_campaign=free-shipping" target="_blank" rel="noopener">Install Notify Me! free →</a>
+        <a class="cta-ghost" href="https://notify-me.io/tools" target="_blank" rel="noopener">More free tools</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="foot-row">
+      <a class="brand" href="https://notify-me.io" target="_blank" rel="noopener">
+        <span class="bell"><svg viewBox="0 0 48 48" fill="#fff" xmlns="http://www.w3.org/2000/svg"><path d="M24 13c-7.2 0-11 6.4-11 18.5h5.2C18.2 21 20 18.2 24 18.2s5.8 2.8 5.8 13.3H35C35 19.4 31.2 13 24 13Z"/><path d="M17.4 33.6a6.6 6.6 0 0 0 13.2 0Z"/></svg></span>
+        <span class="brand-name">Notify <i>Me!</i></span>
+      </a>
+      <nav class="foot-links">
+        <a href="https://notify-me.io/back-in-stock" target="_blank" rel="noopener">Back in Stock</a>
+        <a href="https://notify-me.io/shopify-preorder" target="_blank" rel="noopener">Preorder</a>
+        <a href="https://notify-me.io/tools" target="_blank" rel="noopener">More tools</a>
+      </nav>
+    </div>
+    <div class="foot-copy">A free tool by Notify Me!™ · The math is exact; the threshold guidance is a starting point, test it against your own data.</div>
+  </footer>
+</div>
+
+<script>
+(function(){
+  const $ = id => document.getElementById(id);
+  const money = n => '$'+ (Math.round(n*100)/100).toLocaleString(undefined,{minimumFractionDigits:0,maximumFractionDigits:2});
+  const parseNum = v => { const n=parseFloat(String(v).replace(/[^0-9.]/g,'')); return isNaN(n)?null:n; };
+
+  function run(){
+    const aov=parseNum($('aov').value), ship=parseNum($('ship').value), mPct=parseNum($('margin').value);
+    if(aov===null||ship===null||mPct===null||aov<=0||ship<0||mPct<=0||mPct>100){ $('err').style.display='block'; return; }
+    $('err').style.display='none';
+    const m = mPct/100;
+
+    // Break-even: order value V where the extra gross profit from the spend above current AOV
+    // covers the shipping cost. Profit on an order = V*m. To absorb `ship` and keep at least
+    // current per-order profit (aov*m), you need V*m - ship >= aov*m  ->  V >= aov + ship/m.
+    const breakeven = aov + ship/m;
+
+    // Recommended threshold: a common, evidence-informed heuristic is ~15-30% above AOV,
+    // but never below the true break-even. We take the larger of (1.25*AOV) and breakeven,
+    // rounded to a clean number.
+    const heuristic = aov*1.25;
+    let threshold = Math.max(heuristic, breakeven);
+    // round to nearest $5 for a clean storefront number
+    threshold = Math.ceil(threshold/5)*5;
+
+    const upliftNeeded = ship/m;                 // extra revenue per order to cover free shipping in margin terms
+    const marginAtThreshold = threshold*m - ship; // gross profit on an order at the threshold, after shipping
+    const hitIfAbsorbNow = (ship/(aov*m))*100;    // % of current gross profit eaten if you give free shipping at today's AOV
+
+    $('h-threshold').textContent = money(threshold);
+    $('h-note').textContent = `Offer free shipping on orders over ${money(threshold)}. That's about ${Math.round((threshold/aov-1)*100)}% above your current ${money(aov)} AOV, set to nudge order size up while staying profitable.`;
+
+    $('s-uplift').textContent = money(upliftNeeded);
+    const marginEl=$('s-margin'); marginEl.textContent = money(marginAtThreshold);
+    marginEl.className = 'val '+(marginAtThreshold<=0?'crit':marginAtThreshold < aov*m*0.5?'warn':'good');
+    const hitEl=$('s-hit'); hitEl.textContent = Math.round(hitIfAbsorbNow)+'%';
+    hitEl.className = 'val '+(hitIfAbsorbNow>=70?'crit':hitIfAbsorbNow>=40?'warn':'good');
+    $('s-breakeven').textContent = money(breakeven);
+
+    const ex=$('ex-list'); ex.innerHTML='';
+    const items=[
+      `<b>Why not free shipping on everything?</b> At your current ${money(aov)} AOV, absorbing ${money(ship)} of shipping eats <b>${Math.round(hitIfAbsorbNow)}%</b> of the gross profit on that order. The threshold protects you from that.`,
+      `<b>The threshold does two jobs:</b> it only gives free shipping once an order is big enough to afford it (≥ ${money(breakeven)} break-even), and it pulls smaller orders up toward the bar.`,
+      `<b>Make the nudge visible.</b> A cart message like "You're ${money(threshold-aov)} away from free shipping" is what actually drives the AOV lift, the threshold alone does little if shoppers don't see it.`,
+      `<b>Watch the floor.</b> If many orders already sit above ${money(threshold)}, you're giving away shipping you'd have gotten anyway, raise the bar. If almost none reach it, lower it or it just frustrates people.`
+    ];
+    items.forEach(t=>{ const li=document.createElement('li'); li.innerHTML=t; ex.appendChild(li); });
+
+    let caveatText;
+    if(marginAtThreshold<=0){
+      caveatText = `<b>Caution:</b> even at this threshold, shipping eats your entire margin on the order. Your shipping cost (${money(ship)}) is very high relative to your margin. Consider a higher threshold, partial shipping subsidy, or building shipping into product price.`;
+    } else {
+      caveatText = `<b>Remember:</b> this is the break-even math, not a guarantee of more profit. Free shipping lifts AOV and conversion in most stores, but the size of that lift varies. Run it for 2–4 weeks and compare AOV and total margin against the period before.`;
+    }
+    $('caveat').innerHTML = caveatText;
+
+    $('step-input').style.display='none';
+    $('step-report').classList.add('show');
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+
+  $('run').addEventListener('click', run);
+  ['aov','ship','margin'].forEach(id=>$(id).addEventListener('keydown',e=>{ if(e.key==='Enter') run(); }));
+  $('restart').addEventListener('click', ()=>{
+    $('step-report').classList.remove('show');
+    $('step-input').style.display='block';
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+})();
+</script>
+</body>
+</html>
