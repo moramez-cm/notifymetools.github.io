@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LTV:CAC Profitability Checker | Notify Me!</title>
+<meta name="description" content="Are you actually making money on each customer? Most Shopify stores undercount their real acquisition cost. Enter your numbers and see your true CAC, your LTV, and whether your unit economics work. Free.">
+<meta property="og:title" content="LTV:CAC Profitability Checker">
+<meta property="og:description" content="Find out if you make or lose money on each customer. Your real CAC vs LTV, in 60 seconds.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=PT+Mono&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#003BAF; --blue-deep:#002E89; --blue-soft:#E3EAF8; --blue-tint:#F4F7FC;
+    --ink:#101828; --ink-soft:#475467; --paper:#FFFFFF; --bg:#F7F9FC;
+    --line:#E4E9F2; --line-soft:#EEF2F8;
+    --crit:#E5484D; --warn:#F2A93B; --good:#1FAE6B;
+    --sans:"Inter",system-ui,-apple-system,sans-serif; --mono:"PT Mono",ui-monospace,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;}
+  body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 20px;}
+
+  .bar{padding:22px 0;display:flex;align-items:center;justify-content:space-between;}
+  .brand{display:flex;align-items:center;gap:9px;text-decoration:none;}
+  .bell{width:30px;height:30px;background:var(--blue);border-radius:8px;display:flex;align-items:center;justify-content:center;flex:0 0 auto;}
+  .bell svg{width:20px;height:20px;}
+  .brand-name{font-weight:800;font-size:18px;letter-spacing:-0.01em;color:var(--ink);}
+  .brand-name i{color:var(--blue);font-style:italic;}
+  .bar-cta{font-size:13px;font-weight:600;text-decoration:none;color:var(--blue);border:1.5px solid var(--line);padding:8px 14px;border-radius:8px;transition:border-color .15s,background .15s;}
+  .bar-cta:hover{border-color:var(--blue);background:var(--blue-tint);}
+
+  .hero{padding:30px 0 8px;}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;color:var(--blue);background:var(--blue-soft);padding:6px 14px;border-radius:999px;margin-bottom:20px;}
+  h1{font-size:clamp(32px,6.2vw,50px);line-height:1.06;letter-spacing:-0.03em;font-weight:800;}
+  h1 span{color:var(--blue);}
+  .sub{margin-top:18px;font-size:18px;color:var(--ink-soft);max-width:58ch;}
+
+  .explainer{margin-top:24px;background:var(--blue-tint);border:1px solid var(--blue-soft);border-radius:14px;padding:20px 22px;}
+  .explainer h2{font-size:15px;font-weight:700;margin-bottom:8px;}
+  .explainer p{font-size:14px;color:var(--ink-soft);}
+  .explainer b{color:var(--ink);}
+
+  .panel{margin-top:22px;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:26px;box-shadow:0 4px 24px rgba(16,24,40,.05);}
+  .panel h2{font-size:16px;font-weight:700;margin-bottom:4px;}
+  .panel h2 .step{color:var(--blue);font-family:var(--mono);font-size:13px;}
+  .panel .phint{font-size:13px;color:var(--ink-soft);margin-bottom:18px;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .field{margin-bottom:16px;}
+  .field-label{font-size:14px;font-weight:600;margin-bottom:4px;display:block;}
+  .field-hint{font-size:12px;color:var(--ink-soft);margin-bottom:9px;}
+  .input-wrap{position:relative;}
+  .input-pre,.input-suf{position:absolute;top:50%;transform:translateY(-50%);color:var(--ink-soft);font-family:var(--mono);font-size:14px;pointer-events:none;}
+  .input-pre{left:14px;} .input-suf{right:14px;}
+  .num{width:100%;font-family:var(--mono);font-size:15px;padding:13px 14px;border:1.5px solid var(--line);border-radius:9px;background:var(--bg);color:var(--ink);outline:none;transition:border-color .15s,box-shadow .15s,background .15s;}
+  .num.pre{padding-left:30px;} .num.suf{padding-right:32px;}
+  .num:focus{border-color:var(--blue);background:var(--paper);box-shadow:0 0 0 4px var(--blue-soft);}
+  .num::placeholder{color:#98A2B3;}
+  .divider{height:1px;background:var(--line-soft);margin:22px 0;}
+  .btn{font-family:var(--sans);font-weight:600;font-size:15px;padding:15px 26px;border:none;cursor:pointer;background:var(--blue);color:#fff;border-radius:10px;transition:background .15s,transform .1s;width:100%;}
+  .btn:hover{background:var(--blue-deep);}
+  .btn:active{transform:scale(.99);}
+  .err{color:var(--crit);font-size:13px;margin-top:12px;font-family:var(--mono);display:none;}
+
+  .report{display:none;padding:8px 0 50px;}
+  .report.show{display:block;}
+
+  .verdict{border-radius:18px;padding:30px;margin-bottom:20px;box-shadow:0 4px 24px rgba(16,24,40,.05);text-align:center;color:#fff;}
+  .verdict.good{background:linear-gradient(135deg,#1FAE6B,#15915A);}
+  .verdict.warn{background:linear-gradient(135deg,#F2A93B,#E08C1A);}
+  .verdict.crit{background:linear-gradient(135deg,#E5484D,#C8353A);}
+  .verdict .ratio{font-size:60px;font-weight:800;letter-spacing:-0.03em;line-height:1;}
+  .verdict .rlabel{font-family:var(--mono);font-size:13px;opacity:.85;margin-top:6px;letter-spacing:0.05em;}
+  .verdict h2{font-size:24px;margin-top:16px;letter-spacing:-0.02em;}
+  .verdict p{font-size:15px;opacity:.92;margin-top:8px;max-width:48ch;margin-left:auto;margin-right:auto;}
+
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;}
+  .stat{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px;}
+  .stat .lab{font-family:var(--mono);font-size:11px;color:var(--ink-soft);margin-bottom:8px;}
+  .stat .val{font-size:24px;font-weight:800;letter-spacing:-0.02em;}
+  .stat .desc{font-size:12px;color:var(--ink-soft);margin-top:6px;}
+
+  .breakdown{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:24px;margin-bottom:20px;}
+  .breakdown h3{font-size:15px;font-weight:700;margin-bottom:14px;}
+  .brow{display:flex;justify-content:space-between;font-size:14px;padding:9px 0;border-top:1px solid var(--line-soft);}
+  .brow:first-of-type{border-top:none;}
+  .brow .k{color:var(--ink-soft);} .brow .v{font-family:var(--mono);font-weight:500;}
+  .brow.tot{font-weight:700;} .brow.tot .v{color:var(--blue);}
+
+  .steps{background:var(--blue-tint);border:1px solid var(--blue-soft);border-radius:16px;padding:24px;margin-bottom:20px;}
+  .steps h3{font-size:15px;font-weight:700;margin-bottom:12px;}
+  .steps ul{list-style:none;}
+  .steps li{font-size:14px;color:var(--ink-soft);padding:7px 0 7px 24px;position:relative;}
+  .steps li::before{content:"";position:absolute;left:0;top:13px;width:8px;height:8px;border-radius:50%;background:var(--blue);}
+  .steps li b{color:var(--ink);}
+
+  .caveat{font-size:13px;color:var(--ink-soft);background:var(--paper);border:1px dashed var(--line);border-radius:12px;padding:16px 18px;margin-bottom:22px;}
+  .caveat b{color:var(--ink);}
+
+  .restart{margin:0 0 22px;text-align:center;}
+  .restart button{background:var(--paper);border:1.5px solid var(--line);font-family:var(--sans);font-size:14px;font-weight:600;color:var(--ink);cursor:pointer;padding:12px 22px;border-radius:10px;transition:border-color .15s,background .15s;}
+  .restart button:hover{border-color:var(--blue);background:var(--blue-tint);color:var(--blue);}
+
+  footer{border-top:1px solid var(--line);margin-top:20px;padding:28px 0 40px;}
+  .foot-row{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+  .foot-links{display:flex;gap:18px;flex-wrap:wrap;}
+  .foot-links a{font-size:13px;color:var(--ink-soft);text-decoration:none;}
+  .foot-links a:hover{color:var(--blue);}
+  .foot-copy{font-family:var(--mono);font-size:11px;color:#98A2B3;margin-top:14px;}
+  .foot-sources{font-size:12px;color:var(--ink-soft);margin-top:14px;line-height:1.7;}
+
+  @media (max-width:560px){.panel{padding:20px;}.grid2{grid-template-columns:1fr;}.stats{grid-template-columns:1fr;}}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="bar">
+    <a class="brand" href="https://notify-me.io" target="_blank" rel="noopener">
+      <span class="bell"><svg viewBox="0 0 48 48" fill="#fff" xmlns="http://www.w3.org/2000/svg"><path d="M24 13c-7.2 0-11 6.4-11 18.5h5.2C18.2 21 20 18.2 24 18.2s5.8 2.8 5.8 13.3H35C35 19.4 31.2 13 24 13Z"/><path d="M17.4 33.6a6.6 6.6 0 0 0 13.2 0Z"/></svg></span>
+      <span class="brand-name">Notify <i>Me!</i></span>
+    </a>
+    <a class="bar-cta" href="https://notify-me.io/tools" target="_blank" rel="noopener">More free tools →</a>
+  </div>
+
+  <section class="hero" id="step-input">
+    <div class="eyebrow">Free tool · runs in your browser</div>
+    <h1>Do you make money on<br>each customer, <span>really?</span></h1>
+    <p class="sub">Most stores look profitable and quietly aren't. The trap: counting only ad spend as your acquisition cost, and judging a customer on their first order alone. Enter your real numbers and find out where you actually stand.</p>
+
+    <div class="explainer">
+      <h2>The number that decides it: LTV : CAC</h2>
+      <p>Your <b>CAC</b> is what it truly costs to win one customer. Your <b>LTV</b> is what that customer is worth over all their orders. The ratio between them tells you if growth makes you richer or poorer. A widely-used benchmark: <b>3:1 is healthy</b>, under <b>1:1 you lose money on every customer</b>, and above <b>5:1</b> you may be under-investing in growth.</p>
+    </div>
+
+    <div class="panel">
+      <h2><span class="step">STEP 1</span> &nbsp;What you spent to acquire customers (last 30 days)</h2>
+      <div class="phint">Real CAC includes more than ads. Add what applies, leave the rest blank.</div>
+      <div class="grid2">
+        <div class="field">
+          <label class="field-label">Ad spend</label>
+          <div class="field-hint">Meta, Google, TikTok, etc.</div>
+          <div class="input-wrap"><span class="input-pre">$</span><input class="num pre" id="ads" type="text" inputmode="decimal" placeholder="5000"></div>
+        </div>
+        <div class="field">
+          <label class="field-label">Other marketing costs</label>
+          <div class="field-hint">Agencies, influencers, email/SMS tools, content.</div>
+          <div class="input-wrap"><span class="input-pre">$</span><input class="num pre" id="other" type="text" inputmode="decimal" placeholder="800"></div>
+        </div>
+      </div>
+      <div class="field">
+        <label class="field-label">New customers acquired in that period</label>
+        <div class="field-hint">First-time buyers, not total orders.</div>
+        <input class="num" id="custs" type="text" inputmode="numeric" placeholder="150">
+      </div>
+
+      <div class="divider"></div>
+
+      <h2><span class="step">STEP 2</span> &nbsp;What a customer is worth</h2>
+      <div class="phint">These turn a one-time sale into real lifetime value.</div>
+      <div class="grid2">
+        <div class="field">
+          <label class="field-label">Average order value</label>
+          <div class="field-hint">Typical order total.</div>
+          <div class="input-wrap"><span class="input-pre">$</span><input class="num pre" id="aov" type="text" inputmode="decimal" placeholder="60"></div>
+        </div>
+        <div class="field">
+          <label class="field-label">Gross margin</label>
+          <div class="field-hint">% of each sale that's profit (before marketing).</div>
+          <div class="input-wrap"><input class="num suf" id="margin" type="text" inputmode="decimal" placeholder="50"><span class="input-suf">%</span></div>
+        </div>
+      </div>
+      <div class="field">
+        <label class="field-label">Average orders per customer (lifetime)</label>
+        <div class="field-hint">How many times a typical customer buys, total. If unsure, 1 = one-and-done, 2–3 = decent repeat.</div>
+        <input class="num" id="freq" type="text" inputmode="decimal" placeholder="1.8">
+      </div>
+
+      <button class="btn" id="run">Check my unit economics</button>
+      <div class="err" id="err">Fill ad spend, new customers, AOV, margin, and orders per customer.</div>
+    </div>
+  </section>
+
+  <section class="report" id="step-report">
+    <div class="verdict" id="verdict">
+      <div class="ratio" id="v-ratio">0:1</div>
+      <div class="rlabel">LTV : CAC RATIO</div>
+      <h2 id="v-title"></h2>
+      <p id="v-desc"></p>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><div class="lab">TRUE CAC</div><div class="val" id="s-cac">$0</div><div class="desc">Fully-loaded cost to acquire one customer.</div></div>
+      <div class="stat"><div class="lab">CUSTOMER LTV</div><div class="val" id="s-ltv">$0</div><div class="desc">Gross profit one customer brings over their lifetime.</div></div>
+      <div class="stat"><div class="lab">PROFIT PER CUSTOMER</div><div class="val" id="s-profit">$0</div><div class="desc">LTV minus what you paid to acquire them.</div></div>
+    </div>
+
+    <div class="breakdown">
+      <h3>How we got there</h3>
+      <div id="bd-list"></div>
+    </div>
+
+    <div class="steps">
+      <h3 id="steps-head">How to improve your ratio</h3>
+      <ul id="steps-list"></ul>
+    </div>
+
+    <div class="caveat">
+      <b>How to read this:</b> the math is exact on the numbers you entered, but the inputs are estimates, especially lifetime orders per customer, which is the single biggest lever and the hardest to know. Pull it from your real repeat-purchase data if you can. Treat this as a directional check on whether your unit economics work, not an accounting statement. The 3:1 benchmark is a widely-cited rule of thumb, not a universal law; capital-efficient or fast-growth businesses sometimes run differently on purpose.
+    </div>
+
+    <div class="restart"><button id="restart">↺ Recalculate</button></div>
+  </section>
+
+  <footer>
+    <div class="foot-row">
+      <a class="brand" href="https://notify-me.io" target="_blank" rel="noopener">
+        <span class="bell"><svg viewBox="0 0 48 48" fill="#fff" xmlns="http://www.w3.org/2000/svg"><path d="M24 13c-7.2 0-11 6.4-11 18.5h5.2C18.2 21 20 18.2 24 18.2s5.8 2.8 5.8 13.3H35C35 19.4 31.2 13 24 13Z"/><path d="M17.4 33.6a6.6 6.6 0 0 0 13.2 0Z"/></svg></span>
+        <span class="brand-name">Notify <i>Me!</i></span>
+      </a>
+      <nav class="foot-links">
+        <a href="https://notify-me.io" target="_blank" rel="noopener">Notify Me!</a>
+        <a href="https://notify-me.io/tools" target="_blank" rel="noopener">Free tools</a>
+      </nav>
+    </div>
+    <div class="foot-sources">
+      <b>Informed by 2026 Shopify unit-economics research:</b> CAC and LTV:CAC benchmarks from EasyApps, QeRetail, Retainful, and Eyeful Media. Widely-cited findings used here: average ecommerce CAC has risen ~60% in five years to roughly $35–$85 blended; a 3:1 LTV:CAC ratio is considered healthy, below 1:1 means a loss per customer; merchants who count only ad spend understate true CAC by 30–50%; and retention is the main lever once acquisition costs rise. Figures are directional.
+    </div>
+    <div class="foot-copy">A free tool by Notify Me!™ · Your numbers never leave your browser.</div>
+  </footer>
+</div>
+
+<script>
+(function(){
+  const $ = id => document.getElementById(id);
+  const money = n => '$'+ (Math.round(n*100)/100).toLocaleString(undefined,{maximumFractionDigits:2});
+  const pn = v => { const n=parseFloat(String(v).replace(/[^0-9.]/g,'')); return isNaN(n)?null:n; };
+
+  function run(){
+    const ads=pn($('ads').value), other=pn($('other').value)||0, custs=pn($('custs').value);
+    const aov=pn($('aov').value), mPct=pn($('margin').value), freq=pn($('freq').value);
+    if(ads===null||custs===null||aov===null||mPct===null||freq===null||custs<=0||aov<=0||mPct<=0||mPct>100||freq<=0){ $('err').style.display='block'; return; }
+    $('err').style.display='none';
+    const m=mPct/100;
+
+    const trueCac=(ads+other)/custs;
+    const adOnlyCac=ads/custs;
+    const ltv=aov*m*freq;                 // gross-profit LTV
+    const firstOrderProfit=aov*m;
+    const profitPerCust=ltv-trueCac;
+    const ratio = trueCac>0 ? ltv/trueCac : 0;
+
+    // verdict band
+    const v=$('verdict'); let band,title,desc;
+    if(ratio<1){ band='crit'; title='You lose money on each customer'; desc=`Every customer costs more to acquire (${money(trueCac)}) than they're worth in profit (${money(ltv)}). Growth here drains cash. The fix is almost always retention or margin, not more ad spend.`; }
+    else if(ratio<3){ band='warn'; title='Profitable, but thin'; desc=`You make money per customer, but at ${ratio.toFixed(1)}:1 you're below the 3:1 healthy mark. There's little cushion for rising ad costs. Focus on repeat purchases and AOV.`; }
+    else if(ratio<=5){ band='good'; title='Healthy unit economics'; desc=`At ${ratio.toFixed(1)}:1 your economics are in the healthy 3:1–5:1 zone. Each customer comfortably pays back their acquisition cost. You can likely invest more in growth.`; }
+    else { band='good'; title='Strong, maybe too cautious'; desc=`At ${ratio.toFixed(1)}:1 each customer is highly profitable, that's great, but above ~5:1 can mean you're under-investing in growth competitors will take. You may have room to spend more to acquire faster.`; }
+    v.className='verdict '+band;
+    $('v-ratio').textContent=ratio.toFixed(1)+':1';
+    $('v-title').textContent=title;
+    $('v-desc').textContent=desc;
+
+    // stats
+    $('s-cac').textContent=money(trueCac);
+    $('s-ltv').textContent=money(ltv);
+    const pEl=$('s-profit'); pEl.textContent=money(profitPerCust);
+    pEl.style.color = profitPerCust<0?'var(--crit)':profitPerCust<trueCac?'var(--warn)':'var(--good)';
+
+    // breakdown
+    const bd=$('bd-list'); bd.innerHTML='';
+    const rows=[
+      ['Ad spend ÷ customers (ad-only CAC)', money(adOnlyCac)],
+      ['+ other marketing ÷ customers', money(other/custs)],
+      ['= true CAC', money(trueCac), 'tot'],
+      ['First-order gross profit (AOV × margin)', money(firstOrderProfit)],
+      ['× lifetime orders per customer ('+freq+')', '×'+freq],
+      ['= customer LTV (gross profit)', money(ltv), 'tot']
+    ];
+    rows.forEach(r=>{ const d=document.createElement('div'); d.className='brow'+(r[2]?' '+r[2]:''); d.innerHTML=`<span class="k">${r[0]}</span><span class="v">${r[1]}</span>`; bd.appendChild(d); });
+
+    // steps
+    const head = ratio<1?'Stop the bleed first':ratio<3?'Get above 3:1':'Protect and scale';
+    $('steps-head').textContent=head;
+    const steps=[];
+    if(adOnlyCac<trueCac*0.85) steps.push(`<b>Your real CAC is higher than your ad number.</b> Ad-only CAC looks like ${money(adOnlyCac)}, but loaded with other costs it's ${money(trueCac)}. Always budget against the true figure.`);
+    steps.push(`<b>Repeat purchases are the biggest lever.</b> At ${freq} orders per customer your LTV is ${money(ltv)}. Getting that to ${(freq+1).toFixed(1)} lifts LTV to ${money(aov*m*(freq+1))} with zero extra ad spend, the ratio moves the most here.`);
+    steps.push(`<b>Lean on owned channels.</b> Email and SMS reach past buyers at near-zero cost versus ${money(trueCac)} to acquire a new one. Every repeat order through them is almost pure margin.`);
+    steps.push(`<b>Raise AOV.</b> Bundles, thresholds, and upsells increase what each acquired customer is worth without paying to acquire anyone new.`);
+    if(ratio<1) steps.push(`<b>Don't scale this channel yet.</b> More spend at a sub-1:1 ratio loses more money. Fix retention or margin before pouring in budget.`);
+    const sl=$('steps-list'); sl.innerHTML='';
+    steps.forEach(t=>{ const li=document.createElement('li'); li.innerHTML=t; sl.appendChild(li); });
+
+    $('step-input').style.display='none';
+    $('step-report').classList.add('show');
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+
+  $('run').addEventListener('click', run);
+  ['ads','other','custs','aov','margin','freq'].forEach(id=>$(id).addEventListener('keydown',e=>{ if(e.key==='Enter') run(); }));
+  $('restart').addEventListener('click', ()=>{ $('step-report').classList.remove('show'); $('step-input').style.display='block'; window.scrollTo({top:0,behavior:'smooth'}); });
+})();
+</script>
+</body>
+</html>
