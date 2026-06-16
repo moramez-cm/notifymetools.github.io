@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Should I Switch My Shopify Theme? (2026) | Notify Me!</title>
+<meta name="description" content="Stuck deciding whether to keep, upgrade, or rebuild your Shopify theme? Answer 6 questions for an honest verdict, stay put, upgrade in place, or migrate, plus what each path really involves. Free.">
+<meta property="og:title" content="Should I Switch My Shopify Theme? (2026)">
+<meta property="og:description" content="An honest verdict on whether to keep, upgrade, or rebuild your Shopify theme. No sales pitch.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=PT+Mono&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#003BAF; --blue-deep:#002E89; --blue-soft:#E3EAF8; --blue-tint:#F4F7FC;
+    --ink:#101828; --ink-soft:#475467; --paper:#FFFFFF; --bg:#F7F9FC;
+    --line:#E4E9F2; --line-soft:#EEF2F8;
+    --crit:#E5484D; --warn:#F2A93B; --good:#1FAE6B;
+    --sans:"Inter",system-ui,-apple-system,sans-serif; --mono:"PT Mono",ui-monospace,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;}
+  body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 20px;}
+
+  .bar{padding:22px 0;display:flex;align-items:center;justify-content:space-between;}
+  .brand{display:flex;align-items:center;gap:9px;text-decoration:none;}
+  .bell{width:30px;height:30px;background:var(--blue);border-radius:8px;display:flex;align-items:center;justify-content:center;flex:0 0 auto;}
+  .bell svg{width:20px;height:20px;}
+  .brand-name{font-weight:800;font-size:18px;letter-spacing:-0.01em;color:var(--ink);}
+  .brand-name i{color:var(--blue);font-style:italic;}
+  .bar-cta{font-size:13px;font-weight:600;text-decoration:none;color:var(--blue);border:1.5px solid var(--line);padding:8px 14px;border-radius:8px;transition:border-color .15s,background .15s;}
+  .bar-cta:hover{border-color:var(--blue);background:var(--blue-tint);}
+
+  .hero{padding:30px 0 8px;}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;color:var(--blue);background:var(--blue-soft);padding:6px 14px;border-radius:999px;margin-bottom:20px;}
+  h1{font-size:clamp(30px,5.8vw,46px);line-height:1.07;letter-spacing:-0.03em;font-weight:800;}
+  h1 span{color:var(--blue);}
+  .sub{margin-top:18px;font-size:18px;color:var(--ink-soft);max-width:58ch;}
+
+  .explainer{margin-top:24px;background:var(--blue-tint);border:1px solid var(--blue-soft);border-radius:14px;padding:20px 22px;}
+  .explainer h2{font-size:15px;font-weight:700;margin-bottom:8px;}
+  .explainer p{font-size:14px;color:var(--ink-soft);}
+  .explainer b{color:var(--ink);}
+
+  .panel{margin-top:22px;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:26px;box-shadow:0 4px 24px rgba(16,24,40,.05);}
+  .q{margin-bottom:22px;}
+  .q:last-of-type{margin-bottom:24px;}
+  .q .qt{font-size:15px;font-weight:600;margin-bottom:10px;}
+  .q .qh{font-size:13px;color:var(--ink-soft);margin:-6px 0 12px;}
+  .opts{display:flex;gap:10px;flex-wrap:wrap;}
+  .opt{flex:1 1 auto;min-width:110px;padding:13px 16px;border:1.5px solid var(--line);border-radius:10px;background:var(--bg);cursor:pointer;font-family:var(--sans);font-size:14px;font-weight:600;color:var(--ink);text-align:center;transition:border-color .15s,background .15s;}
+  .opt:hover{border-color:var(--blue);background:var(--blue-tint);}
+  .opt.sel{border-color:var(--blue);background:var(--blue-soft);box-shadow:0 0 0 3px var(--blue-soft);}
+
+  .btn{font-family:var(--sans);font-weight:600;font-size:15px;padding:15px 26px;border:none;cursor:pointer;background:var(--blue);color:#fff;border-radius:10px;transition:background .15s,transform .1s;width:100%;}
+  .btn:hover{background:var(--blue-deep);}
+  .btn:active{transform:scale(.99);}
+  .err{color:var(--crit);font-size:13px;margin-top:12px;font-family:var(--mono);display:none;}
+
+  .report{display:none;padding:8px 0 50px;}
+  .report.show{display:block;}
+
+  .verdict{border-radius:18px;padding:30px;margin-bottom:20px;box-shadow:0 4px 24px rgba(16,24,40,.05);color:#fff;}
+  .verdict.stay{background:linear-gradient(135deg,#1FAE6B,#15915A);}
+  .verdict.upgrade{background:linear-gradient(135deg,#2C6ECB,#003BAF);}
+  .verdict.plan{background:linear-gradient(135deg,#F2A93B,#E08C1A);}
+  .verdict.urgent{background:linear-gradient(135deg,#E5484D,#C8353A);}
+  .verdict .tag{font-family:var(--mono);font-size:12px;opacity:.85;letter-spacing:.05em;}
+  .verdict h2{font-size:27px;margin-top:8px;letter-spacing:-0.02em;}
+  .verdict p{font-size:15px;opacity:.94;margin-top:10px;}
+
+  .reasons{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:24px;margin-bottom:20px;}
+  .reasons h3{font-size:15px;font-weight:700;margin-bottom:12px;}
+  .rrow{display:flex;gap:12px;font-size:14px;padding:11px 0;border-top:1px solid var(--line-soft);align-items:flex-start;}
+  .rrow:first-of-type{border-top:none;}
+  .rmark{font-family:var(--mono);font-size:10px;font-weight:500;padding:3px 9px;border-radius:6px;height:fit-content;white-space:nowrap;color:#fff;margin-top:1px;}
+  .rmark.push{background:var(--crit);} .rmark.watch{background:var(--warn);color:var(--ink);} .rmark.ok{background:var(--good);}
+  .rrow .rt{color:var(--ink-soft);} .rrow .rt b{color:var(--ink);}
+
+  .pathbox{background:var(--blue-tint);border:1px solid var(--blue-soft);border-radius:16px;padding:24px;margin-bottom:20px;}
+  .pathbox h3{font-size:15px;font-weight:700;margin-bottom:12px;}
+  .pathbox ul{list-style:none;}
+  .pathbox li{font-size:14px;color:var(--ink-soft);padding:8px 0 8px 26px;position:relative;}
+  .pathbox li::before{content:"";position:absolute;left:0;top:14px;width:8px;height:8px;border-radius:50%;background:var(--blue);}
+  .pathbox li b{color:var(--ink);}
+
+  .caveat{font-size:13px;color:var(--ink-soft);background:var(--paper);border:1px dashed var(--line);border-radius:12px;padding:16px 18px;margin-bottom:22px;}
+  .caveat b{color:var(--ink);}
+
+  .restart{margin:0 0 22px;text-align:center;}
+  .restart button{background:var(--paper);border:1.5px solid var(--line);font-family:var(--sans);font-size:14px;font-weight:600;color:var(--ink);cursor:pointer;padding:12px 22px;border-radius:10px;transition:border-color .15s,background .15s;}
+  .restart button:hover{border-color:var(--blue);background:var(--blue-tint);color:var(--blue);}
+
+  footer{border-top:1px solid var(--line);margin-top:20px;padding:28px 0 40px;}
+  .foot-row{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+  .foot-links{display:flex;gap:18px;flex-wrap:wrap;}
+  .foot-links a{font-size:13px;color:var(--ink-soft);text-decoration:none;}
+  .foot-links a:hover{color:var(--blue);}
+  .foot-copy{font-family:var(--mono);font-size:11px;color:#98A2B3;margin-top:14px;}
+  .foot-sources{font-size:12px;color:var(--ink-soft);margin-top:14px;line-height:1.7;}
+
+  @media (max-width:560px){.panel{padding:20px;}}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="bar">
+    <a class="brand" href="https://notify-me.io" target="_blank" rel="noopener">
+      <span class="bell"><svg viewBox="0 0 48 48" fill="#fff" xmlns="http://www.w3.org/2000/svg"><path d="M24 13c-7.2 0-11 6.4-11 18.5h5.2C18.2 21 20 18.2 24 18.2s5.8 2.8 5.8 13.3H35C35 19.4 31.2 13 24 13Z"/><path d="M17.4 33.6a6.6 6.6 0 0 0 13.2 0Z"/></svg></span>
+      <span class="brand-name">Notify <i>Me!</i></span>
+    </a>
+    <a class="bar-cta" href="https://notify-me.io/tools" target="_blank" rel="noopener">More free tools →</a>
+  </div>
+
+  <section class="hero" id="step-input">
+    <div class="eyebrow">Honest verdict · no "just rebuild it" sales pitch</div>
+    <h1>Should you switch your<br>Shopify <span>theme?</span></h1>
+    <p class="sub">Switching is expensive and risky. Staying on the wrong theme quietly caps your conversion. Most advice online wants to sell you a rebuild, this just gives you a straight answer based on your situation: stay put, upgrade in place, or migrate.</p>
+
+    <div class="explainer">
+      <h2>The quick background</h2>
+      <p>Shopify themes come in three generations now: old <b>Vintage</b> themes (security fixes only, no new features), <b>Online Store 2.0</b> (the modern standard, ~78% of stores), and the brand-new <b>Horizon</b> architecture from Summer '26. Where you sit, how customized you are, and how much you're fighting your theme all decide whether switching is worth the cost. Answer below.</p>
+    </div>
+
+    <div class="panel">
+      <div class="q">
+        <div class="qt">1. What kind of theme are you on?</div>
+        <div class="qh">Shopify admin → Online Store → Themes. No "Add section" on every page usually means Vintage.</div>
+        <div class="opts" data-q="arch">
+          <button class="opt" data-v="vintage">Vintage (1.0)</button>
+          <button class="opt" data-v="os2">Online Store 2.0</button>
+          <button class="opt" data-v="horizon">Horizon (new)</button>
+          <button class="opt" data-v="unsure">Not sure</button>
+        </div>
+      </div>
+      <div class="q">
+        <div class="qt">2. When was your theme last updated by its maker?</div>
+        <div class="qh">Check the theme's changelog or the developer's site.</div>
+        <div class="opts" data-q="updated">
+          <button class="opt" data-v="recent">Within a year</button>
+          <button class="opt" data-v="old">1–2 years ago</button>
+          <button class="opt" data-v="dead">2+ years / vendor gone</button>
+          <button class="opt" data-v="unsure">Not sure</button>
+        </div>
+      </div>
+      <div class="q">
+        <div class="qt">3. How customized is your theme?</div>
+        <div class="qh">This is the single biggest factor in migration cost.</div>
+        <div class="opts" data-q="custom">
+          <button class="opt" data-v="light">Light (mostly stock)</button>
+          <button class="opt" data-v="medium">Medium (some custom code)</button>
+          <button class="opt" data-v="heavy">Heavy / fully bespoke</button>
+        </div>
+      </div>
+      <div class="q">
+        <div class="qt">4. Are you fighting your theme with apps and custom code to get basic things done?</div>
+        <div class="qh">Patching missing layout/section features with apps is a classic "outgrown it" signal.</div>
+        <div class="opts" data-q="fighting">
+          <button class="opt" data-v="yes">Constantly</button>
+          <button class="opt" data-v="some">Sometimes</button>
+          <button class="opt" data-v="no">Rarely</button>
+        </div>
+      </div>
+      <div class="q">
+        <div class="qt">5. How does it feel on mobile?</div>
+        <div class="qh">Most of your traffic is mobile; a dated theme shows there first.</div>
+        <div class="opts" data-q="mobile">
+          <button class="opt" data-v="bad">Slow / clunky</button>
+          <button class="opt" data-v="ok">Okay</button>
+          <button class="opt" data-v="good">Fast & clean</button>
+        </div>
+      </div>
+      <div class="q">
+        <div class="qt">6. Are you planning a rebrand or major redesign soon?</div>
+        <div class="qh">If yes, that's the natural moment to switch, you rebuild once.</div>
+        <div class="opts" data-q="redesign">
+          <button class="opt" data-v="yes">Yes, within ~60 days</button>
+          <button class="opt" data-v="maybe">Maybe later</button>
+          <button class="opt" data-v="no">No plans</button>
+        </div>
+      </div>
+
+      <button class="btn" id="run">Get my verdict</button>
+      <div class="err" id="err">Please answer all six questions.</div>
+    </div>
+  </section>
+
+  <section class="report" id="step-report">
+    <div class="verdict" id="verdict">
+      <div class="tag">THE VERDICT</div>
+      <h2 id="v-title"></h2>
+      <p id="v-desc"></p>
+    </div>
+
+    <div class="reasons">
+      <h3>What's behind this</h3>
+      <div id="reason-list"></div>
+    </div>
+
+    <div class="pathbox">
+      <h3 id="path-head">If you do switch, here's what it really involves</h3>
+      <ul id="path-list"></ul>
+    </div>
+
+    <div class="caveat">
+      <b>How to read this:</b> this is a decision aid, not a technical inspection of your store, it reasons from your answers, not a scan. The biggest cost driver, how much custom work a migration needs, depends on details only you (or your developer) can see. The general facts behind the logic (Vintage themes get security-only updates; OS 2.0 migration tends to bring meaningfully faster loads and a conversion lift; heavily customized themes cost far more to move) are widely reported, but your numbers will vary. Get a developer to scope the actual work before committing budget.
+    </div>
+
+    <div class="restart"><button id="restart">↺ Redo the check</button></div>
+  </section>
+
+  <footer>
+    <div class="foot-row">
+      <a class="brand" href="https://notify-me.io" target="_blank" rel="noopener">
+        <span class="bell"><svg viewBox="0 0 48 48" fill="#fff" xmlns="http://www.w3.org/2000/svg"><path d="M24 13c-7.2 0-11 6.4-11 18.5h5.2C18.2 21 20 18.2 24 18.2s5.8 2.8 5.8 13.3H35C35 19.4 31.2 13 24 13Z"/><path d="M17.4 33.6a6.6 6.6 0 0 0 13.2 0Z"/></svg></span>
+        <span class="brand-name">Notify <i>Me!</i></span>
+      </a>
+      <nav class="foot-links">
+        <a href="https://notify-me.io" target="_blank" rel="noopener">Notify Me!</a>
+        <a href="https://notify-me.io/tools" target="_blank" rel="noopener">Free tools</a>
+      </nav>
+    </div>
+    <div class="foot-sources">
+      <b>Informed by 2026 Shopify theme research:</b> Shopify Help Center & dev docs on theme architecture versions and OS 2.0 migration assessment; EasyApps OS 2.0 guide (78% of stores on OS 2.0; vintage migration ~40–60% faster loads and ~8–15% conversion lift); Fuelthemes end-of-life signals (12+ months without an update = path to end-of-life); EasySell guide on the Summer '26 Horizon architecture. Vintage themes receive security fixes only. Figures are directional industry findings, not a measurement of your store.
+    </div>
+    <div class="foot-copy">A free tool by Notify Me!™ · Runs entirely in your browser.</div>
+  </footer>
+</div>
+
+<script>
+(function(){
+  const $ = id => document.getElementById(id);
+  const A={arch:null,updated:null,custom:null,fighting:null,mobile:null,redesign:null};
+
+  document.querySelectorAll('.opts').forEach(group=>{
+    const q=group.dataset.q;
+    group.querySelectorAll('.opt').forEach(btn=>{
+      btn.onclick=()=>{ A[q]=btn.dataset.v; group.querySelectorAll('.opt').forEach(x=>x.classList.remove('sel')); btn.classList.add('sel'); $('err').style.display='none'; };
+    });
+  });
+
+  function run(){
+    if(Object.values(A).some(v=>v===null)){ $('err').style.display='block'; return; }
+    $('err').style.display='none';
+
+    let pressure=0; const reasons=[];
+
+    // architecture is the dominant factor
+    if(A.arch==='vintage'){ pressure+=40; reasons.push(['push','You\'re on a Vintage theme','Vintage themes get security fixes only, no new features, and miss every platform improvement. This alone is a strong reason to move to a modern theme.']); }
+    else if(A.arch==='unsure'){ pressure+=18; reasons.push(['watch','Architecture unknown','First, confirm whether you\'re on Vintage or OS 2.0 (look for "Add section" on every page). It changes everything about this decision.']); }
+    else if(A.arch==='os2'){ pressure+=4; reasons.push(['ok','You\'re on Online Store 2.0','The modern standard. You don\'t need to chase Horizon unless it solves a specific problem, OS 2.0 is fully capable.']); }
+    else { reasons.push(['ok','You\'re on Horizon','The newest architecture. No reason to switch for the sake of it, you\'re ahead.']); }
+
+    // update recency
+    if(A.updated==='dead'){ pressure+=22; reasons.push(['push','Theme is effectively abandoned','No update in 2+ years (or the vendor is gone) means it\'s on the path to end-of-life and accumulating security and compatibility risk.']); }
+    else if(A.updated==='old'){ pressure+=10; reasons.push(['watch','Update is getting stale','1–2 years without an update means you\'re missing recent platform features. Watch for the vendor going quiet.']); }
+    else if(A.updated==='unsure'){ pressure+=6; reasons.push(['watch','Update status unknown','Check the changelog, a theme not touched in 12+ months is a warning sign.']); }
+    else { reasons.push(['ok','Actively maintained','Recent updates mean the theme is keeping pace with the platform.']); }
+
+    // fighting the theme
+    if(A.fighting==='yes'){ pressure+=18; reasons.push(['push','You\'re fighting the theme','Constantly patching missing features with apps and code is the classic sign you\'ve outgrown it, and that app stack is costing you money and speed.']); }
+    else if(A.fighting==='some'){ pressure+=8; reasons.push(['watch','Occasional workarounds','Some friction is normal; constant friction isn\'t. Keep an eye on how often you reach for an app to fix a layout gap.']); }
+    else { reasons.push(['ok','Theme does what you need','You\'re not bending over backwards to make it work, a good sign it still fits.']); }
+
+    // mobile
+    if(A.mobile==='bad'){ pressure+=14; reasons.push(['push','Poor mobile experience','Most of your traffic is mobile. A slow, clunky mobile theme directly caps conversion, and modern themes are markedly faster.']); }
+    else if(A.mobile==='ok'){ pressure+=5; reasons.push(['watch','Mobile is just "okay"','There\'s likely conversion left on the table; worth comparing against a modern theme demo on your phone.']); }
+    else { reasons.push(['ok','Strong mobile experience','Fast and clean on mobile is exactly what you want, no pressure here.']); }
+
+    // customization (cost modifier, not pressure to switch, but shapes the path)
+    if(A.custom==='heavy') reasons.push(['watch','Heavily customized','This doesn\'t mean stay, but it does mean a switch is a real project: bespoke work has to be rebuilt manually, not auto-migrated. Budget accordingly.']);
+    else if(A.custom==='light') reasons.push(['ok','Lightly customized','Good news for cost, a light/stock theme is far cheaper and faster to move than a bespoke one.']);
+
+    // redesign timing (opportunity)
+    if(A.redesign==='yes'){ pressure+=6; reasons.push(['watch','Redesign coming up','If you\'re rebranding within ~60 days, that\'s the natural moment to switch, you rebuild once instead of twice.']); }
+
+    // verdict bands
+    let band,title,desc;
+    if(pressure>=55){ band='urgent'; title='Migrate, and don\'t wait'; desc='Multiple strong signals point the same way: your current theme is holding the store back and/or accumulating risk. The cost of switching is almost certainly less than what staying is quietly costing you in conversion and exposure. Make it your next major project.'; }
+    else if(pressure>=32){ band='plan'; title='Start planning a migration'; desc='You\'re not in crisis, but the case to move is real. Begin scoping a switch now, get a developer to quote it, pick a modern theme, and aim to migrate in the next quarter rather than letting it drift.'; }
+    else if(pressure>=15){ band='upgrade'; title='Upgrade or refresh in place'; desc='You probably don\'t need a full rebuild. Most of your friction can likely be fixed within your current theme, an updated version, better configuration, or trimming the apps you\'re using as patches. Revisit a full switch only if the friction grows.'; }
+    else { band='stay'; title='Stay put, you\'re in good shape'; desc='Nothing here justifies the cost and risk of switching. Your theme is modern, maintained, and serving you. Put your energy into conversion and marketing instead, a new theme would be effort without a clear payoff.'; }
+
+    const v=$('verdict'); v.className='verdict '+band;
+    $('v-title').textContent=title; $('v-desc').textContent=desc;
+
+    // reasons
+    const rl=$('reason-list'); rl.innerHTML='';
+    const order={push:0,watch:1,ok:2};
+    reasons.sort((a,b)=>order[a[0]]-order[b[0]]).forEach(r=>{
+      const lab=r[0]==='push'?'PUSH':r[0]==='watch'?'WATCH':'FINE';
+      const d=document.createElement('div'); d.className='rrow';
+      d.innerHTML=`<span class="rmark ${r[0]}">${lab}</span><span class="rt"><b>${r[1]}.</b> ${r[2]}</span>`;
+      rl.appendChild(d);
+    });
+
+    // path box
+    const stayish = band==='stay'||band==='upgrade';
+    $('path-head').textContent = stayish ? 'If you do decide to switch later, here\'s what it involves' : 'What your migration will involve';
+    const path=[];
+    if(A.custom==='heavy') path.push(`<b>Budget for manual rebuild.</b> Bespoke customizations don\'t auto-migrate, a developer reconstructs them in the new theme. This is the bulk of the cost and time.`);
+    else path.push(`<b>Your light customization helps.</b> Much of your setup can be re-applied quickly in a modern theme; some can even be moved with Shopify\'s tools.`);
+    path.push(`<b>Re-check every app.</b> Many apps inject code or depend on specific section IDs. Tracking pixels, review widgets, and upsell scripts especially need re-verifying after the switch.`);
+    path.push(`<b>Protect your SEO.</b> Keep the same URL structure and you won\'t lose rankings, that\'s the main risk people fear and it\'s avoidable.`);
+    path.push(`<b>Build on a duplicate, launch when ready.</b> Build and test the new theme as an unpublished draft, then publish in one move. Run analytics on both so you can compare before/after.`);
+    if(A.arch==='vintage') path.push(`<b>Any Theme Store theme is already OS 2.0.</b> Moving off Vintage automatically gets you the modern architecture, sections everywhere, app blocks, and the speed gains.`);
+    if(A.arch==='os2') path.push(`<b>You don\'t have to jump to Horizon.</b> An updated OS 2.0 theme may be all you need; only move to Horizon if its nested-block flexibility solves a real layout problem for you.`);
+    const pl=$('path-list'); pl.innerHTML='';
+    path.forEach(t=>{ const li=document.createElement('li'); li.innerHTML=t; pl.appendChild(li); });
+
+    $('step-input').style.display='none';
+    $('step-report').classList.add('show');
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+
+  $('run').addEventListener('click', run);
+  $('restart').addEventListener('click', ()=>{ $('step-report').classList.remove('show'); $('step-input').style.display='block'; window.scrollTo({top:0,behavior:'smooth'}); });
+})();
+</script>
+</body>
+</html>
