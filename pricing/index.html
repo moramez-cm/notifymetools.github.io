@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shopify Agency Pricing Benchmark (2026) | Notify Me!</title>
+<meta name="description" content="What do Shopify agencies actually charge in 2026? Real retainer, project, and hourly ranges by vendor tier — freelancer to Shopify Plus Certified Partner. Sourced from live agency pricing. Free.">
+<meta property="og:title" content="Shopify Agency Pricing Benchmark (2026)">
+<meta property="og:description" content="Real 2026 retainer, project & hourly ranges by agency tier. See where your pricing sits.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=PT+Mono&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#003BAF; --blue-deep:#002E89; --blue-soft:#E3EAF8; --blue-tint:#F4F7FC;
+    --ink:#101828; --ink-soft:#475467; --paper:#FFFFFF; --bg:#F7F9FC;
+    --line:#E4E9F2; --line-soft:#EEF2F8;
+    --crit:#E5484D; --warn:#F2A93B; --good:#1FAE6B;
+    --sans:"Inter",system-ui,-apple-system,sans-serif; --mono:"PT Mono",ui-monospace,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;}
+  body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:760px;margin:0 auto;padding:0 20px;}
+
+  .bar{padding:22px 0;display:flex;align-items:center;justify-content:space-between;}
+  .brand{display:flex;align-items:center;gap:9px;text-decoration:none;}
+  .bell{width:30px;height:30px;background:var(--blue);border-radius:8px;display:flex;align-items:center;justify-content:center;flex:0 0 auto;}
+  .bell svg{width:17px;height:17px;}
+  .brand-name{font-weight:800;font-size:18px;letter-spacing:-0.01em;color:var(--ink);}
+  .brand-name i{color:var(--blue);font-style:italic;}
+  .bar-cta{font-size:13px;font-weight:600;text-decoration:none;color:var(--blue);border:1.5px solid var(--line);padding:8px 14px;border-radius:8px;transition:border-color .15s,background .15s;}
+  .bar-cta:hover{border-color:var(--blue);background:var(--blue-tint);}
+
+  .hero{padding:30px 0 8px;}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;color:var(--blue);background:var(--blue-soft);padding:6px 14px;border-radius:999px;margin-bottom:20px;}
+  h1{font-size:clamp(32px,6.2vw,50px);line-height:1.06;letter-spacing:-0.03em;font-weight:800;}
+  h1 span{color:var(--blue);}
+  .sub{margin-top:18px;font-size:18px;color:var(--ink-soft);max-width:56ch;}
+
+  .panel{margin-top:30px;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:26px;box-shadow:0 4px 24px rgba(16,24,40,.05);}
+  .field-label{font-family:var(--mono);font-size:12px;color:var(--ink-soft);margin-bottom:9px;display:block;}
+  .field-label span{text-transform:none;color:#98A2B3;}
+
+  .opt-grid{display:grid;gap:10px;margin-bottom:24px;}
+  .opt-grid.cols2{grid-template-columns:1fr 1fr;}
+  .opt-btn{display:block;padding:14px 16px;border:1.5px solid var(--line);border-radius:11px;background:var(--bg);cursor:pointer;font-family:var(--sans);font-size:14px;font-weight:600;color:var(--ink);text-align:left;transition:border-color .15s,background .15s;}
+  .opt-btn small{display:block;font-weight:400;color:var(--ink-soft);font-size:12px;margin-top:3px;}
+  .opt-btn:hover{border-color:var(--blue);background:var(--blue-tint);}
+  .opt-btn.sel{border-color:var(--blue);background:var(--blue-soft);box-shadow:0 0 0 3px var(--blue-soft);}
+
+  .btn{font-family:var(--sans);font-weight:600;font-size:15px;padding:15px 26px;border:none;cursor:pointer;background:var(--blue);color:#fff;border-radius:10px;transition:background .15s,transform .1s;width:100%;}
+  .btn:hover{background:var(--blue-deep);}
+  .btn:active{transform:scale(.99);}
+  .err{color:var(--crit);font-size:13px;margin-top:12px;font-family:var(--mono);display:none;}
+
+  .report{display:none;padding:8px 0 50px;}
+  .report.show{display:block;}
+
+  .headline{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:28px;box-shadow:0 4px 24px rgba(16,24,40,.05);margin-bottom:22px;}
+  .headline .ctx{font-family:var(--mono);font-size:13px;color:var(--blue);margin-bottom:8px;}
+  .headline .big{font-size:40px;font-weight:800;letter-spacing:-0.03em;line-height:1;}
+  .headline .big small{font-size:18px;font-weight:600;color:var(--ink-soft);}
+  .headline .note{font-size:15px;color:var(--ink-soft);margin-top:12px;}
+
+  .rangewrap{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:26px;margin-bottom:22px;}
+  .rangewrap h3{font-size:15px;font-weight:700;margin-bottom:18px;}
+  .rrow{padding:16px 0;border-top:1px solid var(--line-soft);}
+  .rrow:first-of-type{border-top:none;padding-top:0;}
+  .rrow-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:10px;}
+  .rrow-name{font-size:14px;font-weight:600;}
+  .rrow-val{font-family:var(--mono);font-size:15px;font-weight:500;white-space:nowrap;}
+  .rrow.you .rrow-name::after{content:" · your tier";color:var(--blue);font-weight:600;font-family:var(--mono);font-size:11px;}
+  .track{position:relative;height:10px;background:var(--line-soft);border-radius:10px;overflow:hidden;}
+  .track-fill{position:absolute;top:0;bottom:0;border-radius:10px;background:linear-gradient(90deg,var(--blue-soft),var(--blue));}
+  .rrow.you .track-fill{background:linear-gradient(90deg,#BFE0C9,var(--good));}
+  .axis{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;color:var(--ink-soft);margin-top:14px;}
+
+  .insight{background:var(--blue-tint);border:1px solid var(--blue-soft);border-radius:16px;padding:24px;margin-bottom:22px;}
+  .insight h3{font-size:15px;font-weight:700;margin-bottom:10px;}
+  .insight ul{list-style:none;}
+  .insight li{font-size:14px;color:var(--ink-soft);padding:7px 0 7px 24px;position:relative;}
+  .insight li::before{content:"";position:absolute;left:0;top:13px;width:8px;height:8px;border-radius:50%;background:var(--blue);}
+  .insight li b{color:var(--ink);}
+
+  .restart{margin:0 0 22px;text-align:center;}
+  .restart button{background:var(--paper);border:1.5px solid var(--line);font-family:var(--sans);font-size:14px;font-weight:600;color:var(--ink);cursor:pointer;padding:12px 22px;border-radius:10px;transition:border-color .15s,background .15s;}
+  .restart button:hover{border-color:var(--blue);background:var(--blue-tint);color:var(--blue);}
+
+  .cta{background:var(--ink);color:#fff;border-radius:18px;padding:32px;position:relative;overflow:hidden;}
+  .cta::after{content:"";position:absolute;right:-50px;top:-50px;width:200px;height:200px;background:var(--blue);opacity:.22;border-radius:50%;filter:blur(8px);}
+  .cta h3{font-size:23px;letter-spacing:-0.02em;margin-bottom:9px;position:relative;}
+  .cta p{color:#C0CBDC;font-size:15px;max-width:52ch;margin-bottom:20px;position:relative;}
+  .cta-row{display:flex;gap:10px;flex-wrap:wrap;position:relative;}
+  .cta-btn{font-family:var(--sans);font-weight:600;font-size:15px;padding:14px 24px;background:var(--blue);color:#fff;border:none;border-radius:10px;cursor:pointer;text-decoration:none;display:inline-block;transition:background .15s;}
+  .cta-btn:hover{background:#3E82E0;}
+  .cta-ghost{font-family:var(--sans);font-weight:600;font-size:15px;padding:14px 24px;background:transparent;color:#fff;border:1.5px solid #2A3447;border-radius:10px;text-decoration:none;display:inline-block;transition:border-color .15s;}
+  .cta-ghost:hover{border-color:var(--blue);}
+
+  footer{border-top:1px solid var(--line);margin-top:20px;padding:28px 0 40px;}
+  .foot-row{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+  .foot-links{display:flex;gap:18px;flex-wrap:wrap;}
+  .foot-links a{font-size:13px;color:var(--ink-soft);text-decoration:none;}
+  .foot-links a:hover{color:var(--blue);}
+  .foot-copy{font-family:var(--mono);font-size:11px;color:#98A2B3;margin-top:14px;}
+  .foot-sources{font-size:12px;color:var(--ink-soft);margin-top:14px;line-height:1.7;}
+
+  @media (max-width:560px){.panel{padding:20px;}.opt-grid.cols2{grid-template-columns:1fr;}}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="bar">
+    <a class="brand" href="https://notify-me.io" target="_blank" rel="noopener">
+      <span class="bell"><svg viewBox="0 0 48 48" fill="#fff" xmlns="http://www.w3.org/2000/svg"><path d="M24 13c-7.2 0-11 6.4-11 18.5h5.2C18.2 21 20 18.2 24 18.2s5.8 2.8 5.8 13.3H35C35 19.4 31.2 13 24 13Z"/><path d="M17.4 33.6a6.6 6.6 0 0 0 13.2 0Z"/></svg></span>
+      <span class="brand-name">Notify <i>Me!</i></span>
+    </a>
+    <a class="bar-cta" href="https://notify-me.io/partners?utm_source=pricing-tool&utm_medium=button&utm_campaign=agency-pricing#partnerform" target="_blank" rel="noopener">Partner with us →</a>
+  </div>
+
+  <!-- INPUT -->
+  <section class="hero" id="step-input">
+    <div class="eyebrow">2026 market data · 6 sourced agency & marketplace pricing reports</div>
+    <h1>What should a Shopify<br>agency <span>actually charge?</span></h1>
+    <p class="sub">Most agencies underprice because they're guessing. Pick your tier and engagement model to see the real 2026 market range, then check where your rate sits. Useful whether you're setting prices or sanity-checking a quote.</p>
+
+    <div class="panel">
+      <label class="field-label">1. Which best describes you?</label>
+      <div class="opt-grid" id="tier-grid"></div>
+
+      <label class="field-label">2. Engagement model</label>
+      <div class="opt-grid cols2" id="model-grid"></div>
+
+      <button class="btn" id="run">Show the benchmark</button>
+      <div class="err" id="err">Pick a tier and a model first.</div>
+    </div>
+  </section>
+
+  <!-- REPORT -->
+  <section class="report" id="step-report">
+    <div class="headline">
+      <div class="ctx" id="h-ctx"></div>
+      <div class="big" id="h-big"></div>
+      <div class="note" id="h-note"></div>
+    </div>
+
+    <div class="rangewrap">
+      <h3 id="r-head"></h3>
+      <div id="r-rows"></div>
+      <div class="axis" id="r-axis"></div>
+    </div>
+
+    <div class="insight">
+      <h3>What this means for your pricing</h3>
+      <ul id="ins-list"></ul>
+    </div>
+
+    <div class="restart"><button id="restart">↺ Try another tier or model</button></div>
+
+    <div class="cta">
+      <h3 id="cta-head">Turn app referrals into recurring revenue</h3>
+      <p id="cta-body">The agencies pricing best in 2026 layer recurring app revenue on top of retainers. Notify Me!'s partner program pays you for every merchant you bring to back-in-stock, preorder, and wishlist, no extra delivery work on your side.</p>
+      <div class="cta-row">
+        <a class="cta-btn" href="https://notify-me.io/partners?utm_source=pricing-tool&utm_medium=cta&utm_campaign=agency-pricing#partnerform" target="_blank" rel="noopener">See the partner program →</a>
+        <a class="cta-ghost" href="https://notify-me.io/tools" target="_blank" rel="noopener">More free tools</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="foot-row">
+      <a class="brand" href="https://notify-me.io" target="_blank" rel="noopener">
+        <span class="bell"><svg viewBox="0 0 48 48" fill="#fff" xmlns="http://www.w3.org/2000/svg"><path d="M24 13c-7.2 0-11 6.4-11 18.5h5.2C18.2 21 20 18.2 24 18.2s5.8 2.8 5.8 13.3H35C35 19.4 31.2 13 24 13Z"/><path d="M17.4 33.6a6.6 6.6 0 0 0 13.2 0Z"/></svg></span>
+        <span class="brand-name">Notify <i>Me!</i></span>
+      </a>
+      <nav class="foot-links">
+        <a href="https://notify-me.io" target="_blank" rel="noopener">Notify Me!</a>
+        <a href="https://notify-me.io/tools" target="_blank" rel="noopener">Free tools</a>
+        <a href="https://notify-me.io/partners#partnerform" target="_blank" rel="noopener">Partners</a>
+      </nav>
+    </div>
+    <div class="foot-sources">
+      <b>Data sources (2025–2026):</b>
+      Blackbelt Commerce retainer/project breakdown (May 2026) ·
+      Storetasker developer rates (2025) ·
+      Folio3 Shopify expert cost guide (2026) ·
+      Boldmatch certified-partner tier pricing (Feb 2026) ·
+      Contra / Ralph Sanchez rate guide (2025) ·
+      Innovative Shopify agency cost guide (2025).
+      Ranges are USD, reflect blended market pricing, and vary widely by region, scope, and seniority. Figures are directional, not quotes.
+    </div>
+    <div class="foot-copy">A free tool by Notify Me!™ · Built for the Shopify partner ecosystem.</div>
+  </footer>
+</div>
+
+<script>
+(function(){
+  const $ = id => document.getElementById(id);
+
+  /* ---- REAL sourced 2026 agency pricing data (USD) ----
+     Cross-referenced across Blackbelt Commerce, Storetasker, Folio3,
+     Boldmatch, Contra, Innovative Shopify. Each tier holds ranges for
+     three engagement models. lo/hi are monthly $ for retainer,
+     total $ for project, $/hr for hourly. See footer for citation. */
+  const TIERS = {
+    freelancer: { name:'Solo freelancer', blurb:'Single operator, 1 person',
+      retainer:[1500,6000], project:[475,15000], hourly:[30,150],
+      typical:{retainer:'$3,000–5,000 / mo for 25–40 hrs', project:'$2,000–5,000 basic build', hourly:'$75–100 mid-level'} },
+    boutique: { name:'Boutique agency', blurb:'4–12 people, defined process',
+      retainer:[4000,15000], project:[5000,25000], hourly:[100,175],
+      typical:{retainer:'$4,000–5,000 entry, scaling to $12–15k', project:'$5,000–15,000 full build', hourly:'$120–160 blended'} },
+    established: { name:'Established Partner agency', blurb:'15–40 people, Plus implementations',
+      retainer:[10000,30000], project:[20000,75000], hourly:[150,250],
+      typical:{retainer:'$10,000–30,000 / mo dedicated team', project:'$20,000–50,000+ complex', hourly:'$150–250 senior'} },
+    plus: { name:'Shopify Plus Certified Partner', blurb:'Top tier, enterprise Plus',
+      retainer:[15000,40000], project:[50000,250000], hourly:[200,350],
+      typical:{retainer:'$15,000–40,000+ / mo', project:'$50,000–250,000 enterprise', hourly:'$200–350 specialist'} }
+  };
+  const MODELS = {
+    retainer:{ name:'Monthly retainer', unit:'/mo', blurb:'Recurring capacity' },
+    project:{ name:'Fixed project', unit:'total', blurb:'One-off defined scope' },
+    hourly:{ name:'Hourly', unit:'/hr', blurb:'Per hour worked' }
+  };
+
+  let tier=null, model=null;
+
+  // build tier buttons
+  const tg=$('tier-grid');
+  Object.entries(TIERS).forEach(([k,t])=>{
+    const b=document.createElement('button');
+    b.className='opt-btn'; b.dataset.k=k;
+    b.innerHTML=`${t.name}<small>${t.blurb}</small>`;
+    b.onclick=()=>{ tier=k; document.querySelectorAll('#tier-grid .opt-btn').forEach(x=>x.classList.remove('sel')); b.classList.add('sel'); $('err').style.display='none'; };
+    tg.appendChild(b);
+  });
+  // build model buttons
+  const mg=$('model-grid');
+  Object.entries(MODELS).forEach(([k,m])=>{
+    const b=document.createElement('button');
+    b.className='opt-btn'; b.dataset.k=k;
+    b.innerHTML=`${m.name}<small>${m.blurb}</small>`;
+    b.onclick=()=>{ model=k; document.querySelectorAll('#model-grid .opt-btn').forEach(x=>x.classList.remove('sel')); b.classList.add('sel'); $('err').style.display='none'; };
+    mg.appendChild(b);
+  });
+
+  const fmt = n => n>=1000 ? '$'+(n/1000)+'k' : '$'+n;
+  const fmtFull = n => '$'+n.toLocaleString();
+
+  function run(){
+    if(!tier || !model){ $('err').style.display='block'; return; }
+    $('err').style.display='none';
+    const t=TIERS[tier], m=MODELS[model];
+    const [lo,hi]=t[model];
+
+    // headline
+    $('h-ctx').textContent = `${t.name} · ${m.name} · 2026`;
+    if(model==='hourly'){ $('h-big').innerHTML = `${fmtFull(lo)}<small> – </small>${fmtFull(hi)}<small> / hr</small>`; }
+    else if(model==='retainer'){ $('h-big').innerHTML = `${fmtFull(lo)}<small> – </small>${fmtFull(hi)}<small> / mo</small>`; }
+    else { $('h-big').innerHTML = `${fmtFull(lo)}<small> – </small>${fmtFull(hi)}<small> total</small>`; }
+    $('h-note').textContent = `Typical: ${t.typical[model]}.`;
+
+    // range comparison across all tiers for this model
+    $('r-head').textContent = `${m.name} pricing across all agency tiers`;
+    const rows=$('r-rows'); rows.innerHTML='';
+    let maxHi=0;
+    Object.values(TIERS).forEach(tt=>{ if(tt[model][1]>maxHi) maxHi=tt[model][1]; });
+    Object.entries(TIERS).forEach(([k,tt])=>{
+      const [l,h]=tt[model];
+      const left=(l/maxHi)*100, width=((h-l)/maxHi)*100;
+      const row=document.createElement('div');
+      row.className='rrow'+(k===tier?' you':'');
+      const unit = model==='hourly'?'/hr':model==='retainer'?'/mo':'';
+      row.innerHTML=`
+        <div class="rrow-top">
+          <span class="rrow-name">${tt.name}</span>
+          <span class="rrow-val">${fmtFull(l)} – ${fmtFull(h)} ${unit}</span>
+        </div>
+        <div class="track"><div class="track-fill" style="left:${left}%;width:${Math.max(width,2)}%;"></div></div>`;
+      rows.appendChild(row);
+    });
+    $('r-axis').innerHTML = `<span>$0</span><span>${fmt(Math.round(maxHi/2))}</span><span>${fmt(maxHi)}+</span>`;
+
+    // insights tailored to model
+    const ins=$('ins-list'); ins.innerHTML='';
+    const common=[
+      `<b>The model matters more than the rate.</b> A clear fixed-scope project at the top of the range often beats a cheap hourly arrangement that drifts into scope creep.`,
+      `<b>Region swings everything.</b> North American teams sit at the high end; comparable work from other regions can run 40–70% lower. These ranges are blended.`,
+      `<b>Don't compete on price at the bottom.</b> The cheapest tier attracts the most price-sensitive, highest-churn clients. Moving up a tier usually means fewer, better clients.`
+    ];
+    const perModel={
+      retainer:`<b>Retainers are where margin and stability live.</b> Most operators above $100k/mo in revenue prefer retainers — so packaging recurring work is how you move from your current tier into the next.`,
+      project:`<b>Protect project pricing with a change-order process.</b> Experienced teams quote with an assumptions doc; the gap between a $5k and a $25k build is usually scope clarity, not raw skill.`,
+      hourly:`<b>Hourly caps your upside.</b> It ties income to time, not value delivered. The tiers that earn most use hourly only for advisory or overflow, not core delivery.`
+    };
+    [perModel[model],...common].forEach(t=>{ const li=document.createElement('li'); li.innerHTML=t; ins.appendChild(li); });
+
+    $('step-input').style.display='none';
+    $('step-report').classList.add('show');
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+
+  $('run').addEventListener('click', run);
+  $('restart').addEventListener('click', ()=>{
+    $('step-report').classList.remove('show');
+    $('step-input').style.display='block';
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+})();
+</script>
+</body>
+</html>
